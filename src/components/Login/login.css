@@ -1,0 +1,44 @@
+body{
+    background-color: black;
+    color:#87cefa;
+  }
+  .container{
+    padding:100px;
+  }
+  .login-title{
+    text-align: center;
+    font-size:40px;
+    font-weight: bold;
+  
+  }
+  
+  #email,#password{
+    height:30px;
+    width:300px;
+    border-radius: 5px;;
+  }
+  
+  .btn {
+    border: 1px outset;
+    border-radius: 5px;
+    background-color: black;
+    font-weight: bold;
+    color: lightskyblue;
+    padding: 14px 28px;
+    margin-top:20px;
+    font-size: 16px;
+    cursor: pointer;
+    
+  }
+  .forgotPass{
+    font-size: 10px;
+    color:lightskyblue;
+    font-weight: bold;
+  
+  
+  
+  }
+  a:visited{
+    color:white;
+  }
+  
