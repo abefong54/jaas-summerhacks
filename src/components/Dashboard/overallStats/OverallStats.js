@@ -16,10 +16,11 @@ class OverallStats extends React.Component{
         const options = {
         backgroundColor: "black",
         height:200,
-        width:400,
+        width:1000,
         border:2,
           title: {
-            text: "Overall stats"
+            text: "Overall stats",
+            fontColor:"#87cefa",
           },
           axisX:{
             interval: 1,

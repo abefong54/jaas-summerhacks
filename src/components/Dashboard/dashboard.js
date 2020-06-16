@@ -11,9 +11,9 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 class dashboard extends React.Component{
     render(){
         return(
-
-            <Header/> ,     
-            <OverallStats/>
+           <div id="NavBar"><Header/></div>,
+            <div id="overall"><OverallStats/></div>   
+            
         )
     }
 }
