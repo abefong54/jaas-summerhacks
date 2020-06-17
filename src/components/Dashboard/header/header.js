@@ -1,15 +1,24 @@
-import React from 'react';
-import './dashboard.css';
+import React from 'react'
+import { Header, Segment } from 'semantic-ui-react'
+
+const header = () => (
+
+    
+          <Segment clearing>
+          <Header as='h2' floated='right'>
+               Float Right
+          </Header>
+          <Header as='h2' floated='left'>
+                Float Left
+          </Header>
+          </Segment>
+        
 
 
-class dashboard extends React.Component{
-    render(){
-        return(
-            <h1> Header</h1>
 
-                       
-        )
-    }
-}
 
-export default dashboard;
+   
+
+)
+
+export default header;

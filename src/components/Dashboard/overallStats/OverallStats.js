@@ -16,7 +16,7 @@ class OverallStats extends React.Component{
         const options = {
         backgroundColor: "black",
         height:200,
-        width:1000,
+        width:1500,
         border:2,
           title: {
             text: "Overall stats",
@@ -28,7 +28,7 @@ class OverallStats extends React.Component{
         },
         axisY2:{
             
-            gridColor: "black",
+            
             title: "Scale",
             labelFontColor: "#87cefa",
         },
@@ -38,10 +38,14 @@ class OverallStats extends React.Component{
 		color: "#87cefa",
                     
                     dataPoints: [
-                        { y: 200, label: "Surprised" },
+                      { y: 100, label: "Fear" },
+                      { y: 100, label: "Unknown" },
+                      { y: 100, label: "Calm" },
+                      { y: 100, label: "Surprise" },
+                        { y: 100, label: "Disgusted" },
                         { y: 140, label: "Confused" },
-                        { y: 40, label: "Sad" },
-                        { y: 50, label: "Neutral" },
+                        { y: 40, label: "Angry" },
+                        { y: 50, label: "Sad" },
                         { y: 120, label: "Happy"  },
                     ]
            }]
