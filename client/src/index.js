@@ -14,7 +14,6 @@ import Routes from './components/routes';
 ReactDOM.render(
   <Router>
       <div className="App">
-          
           <Routes />
       </div>
   </Router>,
