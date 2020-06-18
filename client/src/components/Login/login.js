@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link , BrowserRouter, Switch, Route} from 'react-router-dom';
 import "./login.css";
 import dashboard from "../Dashboard/dashboard.js";
+import {Button} from 'react-bootstrap'
 import history from '../history';
 
 
@@ -22,7 +23,7 @@ class Login extends Component {
                         <input id="password" type="password" required placeholder="Password"></input>
                         <br></br>
 
-                        <a href="">  <button class="btn success" onClick={()=>history.push('/dashboard')}>Log In</button>   </a>
+                        <a href="">  <Button class="btn success" onClick={()=>history.push('/dashboard')}>Log In</Button>   </a>
                         <br></br>
                         <a href="" class="forgotPass" > Forgot password? Click here.</a>
                       </form>

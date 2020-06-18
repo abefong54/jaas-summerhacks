@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Upload from './upload/upload'
 import './dashboard.css';
 
 
@@ -6,7 +7,9 @@ class Dashboard extends Component{
     // INITIALIZE DEFAULT STATE
     constructor(props) {
         super(props);
-        this.state = {apiResponse:"","other": "other stuff"};
+        this.state = {
+            apiResponse:"","other": "other stuff"
+        };
     }
 
     // FETCH DATA
@@ -25,13 +28,14 @@ class Dashboard extends Component{
     render() {
         console.log(this.state);
         return (  
-            <div>
-                <p className="App-intro"> 
-                    {this.state.apiResponse}
-                    {this.state.other}
-                    hiii
-                </p>
-            </div>
+            <Upload/>
+            // <div>
+            //     <p className="App-intro"> 
+            //         {this.state.apiResponse}
+            //         {this.state.other}
+            //         hiii
+            //     </p>
+            // </div>
         );
     }
 
