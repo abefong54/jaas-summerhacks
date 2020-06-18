@@ -1,15 +1,33 @@
 import React from 'react';
-import './dashboard.css';
+import './header.css';
+import Classes from '../Classes/Classes';
 
 
-class dashboard extends React.Component{
+
+class header extends React.Component{
     render(){
         return(
-            <h1> Header</h1>
+            
+                <div className="NavBar">
+                
+                    <div className="user">
+                    <h1>Hello User!</h1>
+                    </div>
+
+                    
+                    
+                    
+                    
+                
+                </div>
+
+
+            
+            
 
                        
         )
     }
 }
 
-export default dashboard;
+export default header;

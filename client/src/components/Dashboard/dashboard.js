@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './dashboard.css';
+import Header from './Header/header';
+import Classes from './Classes/Classes';
 
 
 class Dashboard extends Component{
@@ -31,6 +33,11 @@ class Dashboard extends Component{
                     {this.state.other}
                     hiii
                 </p>
+                <Header />
+                <div className="dropdownClass">
+                      <Classes />
+                    </div>
+                
             </div>
         );
     }
