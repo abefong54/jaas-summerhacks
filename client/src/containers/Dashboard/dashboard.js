@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Dashboard.css';
+import './dashboard.css';
 import ClassDropdown from '../../components/ClassDropdown/ClassDropdown';
 //import DropdownClass from '../../components/Dropdown.js';
 

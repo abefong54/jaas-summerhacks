@@ -12,11 +12,7 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
   <BrowserRouter>
       <div className="App">
-<<<<<<< HEAD:client/src/index.js
-          <Routes />
-=======
           <App />
->>>>>>> master:src/index.js
       </div>
   </BrowserRouter>,
   document.getElementById('root')

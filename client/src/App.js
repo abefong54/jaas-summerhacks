@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-import logo from './logo.svg';
-import './App.css';
-import Dashboard from './components/Dashboard/dashboard'
-import Login from './components/Login/login.js';
-=======
 import { Route } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
-import Header from './containers/Header/Header.js';
-import Login from './containers/Login/Login.js';
-import Dashboard from './containers/Dashboard/Dashboard.js';
+import Header from './containers/Header/header';
+import Login from './containers/Login/login';
+import Dashboard from './containers/Dashboard/dashboard';
 
->>>>>>> master
 
 
 class App extends Component {
@@ -40,10 +33,6 @@ class App extends Component {
   render() {
       return (  
           <div>
-<<<<<<< HEAD
-            <Login/>
-              <p className="App-intro"> {this.state.apiResponse} </p>
-=======
             <nav>
               <Header/>
             </nav>
@@ -51,7 +40,6 @@ class App extends Component {
             {/* ROUTES TO PAGES */}
             <Route path="/" exact component={Login} />
             <Route path="/dashboard" component={Dashboard} />
->>>>>>> master
           </div>
     );
   }
