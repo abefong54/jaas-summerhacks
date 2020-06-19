@@ -33,13 +33,13 @@ class App extends Component {
   render() {
       return (  
           <div>
-            {/*     <nav>
+            <nav>
               <Header/>
             </nav>
+            {/*    
 
             ADDED SETTINGS AND LOGOUT BUTTONS TO THE HEADER
             WILL ADD HEADER TO THE APP.JS LOGIN SCREEN ONCE I FIGURE OUT HOW TO
-            
             
             */}
             
