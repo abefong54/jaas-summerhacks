@@ -1,9 +1,4 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-import logo from './logo.svg';
-import './App.css';
-import Login from './components/Login/login.js';
-=======
 import { Route } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
@@ -12,7 +7,6 @@ import Login from './containers/Login/Login.js';
 import Dashboard from './containers/Dashboard/Dashboard.js';
 import Footer from './containers/Footer/Footer.js';
 import Grid from '@material-ui/core/Grid';
->>>>>>> almas
 
 
 class App extends Component {
@@ -40,11 +34,6 @@ class App extends Component {
   render() {
       return (  
           <div>
-<<<<<<< HEAD
-            {/* <Login/> */}
-              <p className="App-intro"> {this.state.apiResponse} </p>
-          </div>
-=======
             <Grid container spacing={3}>
               
               {/* HEADER */}
@@ -69,12 +58,7 @@ class App extends Component {
                   </nav>
               </Grid>
             </Grid>
-
-
           </div>
-
-          
->>>>>>> almas
     );
   }
 }
