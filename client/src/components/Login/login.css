@@ -1,11 +1,6 @@
-body {
+* {
   background-color: black;
-  /* background-color: black; */
   color: lightskyblue;
-}
-
-.container {
-  padding: 100px;
 }
 
 .login-title {
@@ -32,11 +27,9 @@ body {
   font-size: 16px;
   cursor: pointer;
 }
+
 .forgotPass {
-  font-size: 10px;
+  font-size: 20px;
   color: lightskyblue;
   font-weight: bold;
-}
-a:visited {
-  color: white;
 }
