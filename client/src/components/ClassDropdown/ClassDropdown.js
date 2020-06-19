@@ -14,7 +14,8 @@ const useStyles = makeStyles({
       height: 48,
       width:250,
       padding: '0 30px',
-      weight: 'bold'
+      weight: 'bold',
+      
     },
   });
 
