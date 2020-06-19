@@ -10,27 +10,6 @@ import Grid from '@material-ui/core/Grid';
 
 
 class App extends Component {
-
-
-  // INITIALIZE DEFAULT STATE
-  constructor(props) {
-      super(props);
-      this.state = {apiResponse: ""};
-  }
-
-  // FETCH DATA
-  callAPI() {
-      fetch("http://localhost:9000/resources")
-          .then(res=>res.text())
-          .then(res=>this.setState( {apiResponse: res}))
-          .catch(err => err);
-  }
-
-  // ONCE COMPONENT MOUNTS, CALL API
-  conponentDidMount() {
-     this.callAPI();
-  }
-
   render() {
       return (  
           <div>
