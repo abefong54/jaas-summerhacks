@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Dashboard.css';
 import ClassDropdown from '../../components/ClassDropdown/ClassDropdown';
+import Grid from '@material-ui/core/Grid';
 
 
 class Dashboard extends Component{
@@ -11,12 +12,23 @@ class Dashboard extends Component{
         // AND A TABLE WITH VIDEOS BELONGING TO A CLASS
         return (  
             <div>
-                <div className="dropdown">
-                    <ClassDropdown/>
-                </div> 
-                <div className="bodyDashboard">
-                    <h1>The Dashboard Body</h1>
-                </div>
+                <Grid container spacing={3}>
+                    <Grid item xs={6}>
+                        <div className="">
+                            WELCOME BANNER
+                        </div> 
+                    </Grid>
+                    <Grid item xs={6}>
+                        <div className="">
+                            <ClassDropdown/>
+                        </div> 
+                    </Grid>
+                    <Grid item xs={12}>
+                        <div className="">
+                            <h1>The Dashboard Body</h1>
+                        </div>
+                    </Grid>
+                </Grid>
             </div>
         );
     }

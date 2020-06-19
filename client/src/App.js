@@ -6,6 +6,7 @@ import Header from './containers/Header/Header.js';
 import Login from './containers/Login/Login.js';
 import Dashboard from './containers/Dashboard/Dashboard.js';
 import Footer from './containers/Footer/Footer.js';
+import Grid from '@material-ui/core/Grid';
 
 
 class App extends Component {
@@ -33,24 +34,30 @@ class App extends Component {
   render() {
       return (  
           <div>
-            <nav>
-              <Header/>
-            </nav>
-            {/*    
+            <Grid container spacing={3}>
+              
+              {/* HEADER */}
+              <Grid item xs={12}>
+                  <nav>
+                    <Header/>
+                  </nav>
+              </Grid>
+              
+              {/* ROUTES TO PAGES */}
+              <Grid container spacing={3}>
+                <Grid item xs={12}> 
+                    <Route path="/" exact component={Login} />
+                    <Route path="/dashboard" component={Dashboard} />
+                </Grid>
+              </Grid>
 
-            ADDED SETTINGS AND LOGOUT BUTTONS TO THE HEADER
-            WILL ADD HEADER TO THE APP.JS LOGIN SCREEN ONCE I FIGURE OUT HOW TO
-            
-            */}
-            
-
-            {/* ROUTES TO PAGES */}
-            <Route path="/" exact component={Login} />
-            <Route path="/dashboard" component={Dashboard} />
-
-            <nav>
-               <Footer/>
-            </nav>
+              {/* FOOTER */}
+              <Grid item xs={12}>
+                  <nav>
+                    <Footer/>
+                  </nav>
+              </Grid>
+            </Grid>
 
 
           </div>
