@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import UploadModal from './Upload/upload'
 import './dashboard.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import ClassDropdown from '../../components/ClassDropdown/ClassDropdown';
 //import DropdownClass from '../../components/Dropdown.js';
 
@@ -40,6 +42,7 @@ class Dashboard extends Component{
         // AND A TABLE WITH VIDEOS BELONGING TO A CLASS
         return (  
             <div>
+                <UploadModal/>
                 <ClassDropdown/>
             </div>
         );
