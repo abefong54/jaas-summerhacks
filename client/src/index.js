@@ -2,21 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
-import { BrowserRouter as Router } from 'react-router-dom';
-import Routes from './components/routes';
 
 //https://www.youtube.com/watch?v=9Ka1fcn74Hg
 //https://pages.awscloud.com/Search-Your-DynamoDB-Data-with-Amazon-Elasticsearch-Service_1103-ABD_OD.html
 //https://www.npmjs.com/package/dashboards
 ReactDOM.render(
-  <Router>
+  <BrowserRouter>
       <div className="App">
-          
-          <Routes />
+          <App />
       </div>
-  </Router>,
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
