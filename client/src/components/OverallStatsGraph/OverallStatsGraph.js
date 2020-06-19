@@ -8,7 +8,7 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
 
-class OverallStats extends React.Component{
+class OverallStatsGraph extends React.Component{
 
     render() {
 
@@ -62,4 +62,4 @@ class OverallStats extends React.Component{
 
 
 }
-export default OverallStats;
+export default OverallStatsGraph;

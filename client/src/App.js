@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { Route } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
-import Login from './containers/Login/login.js';
+import Header from './containers/Header/Header.js';
+import Login from './containers/Login/Login.js';
+import Dashboard from './containers/Dashboard/Dashboard.js';
 
 
 
@@ -30,8 +33,13 @@ class App extends Component {
   render() {
       return (  
           <div>
-            {/* <Login/> */}
-              <p className="App-intro"> {this.state.apiResponse} </p>
+            <nav>
+              <Header/>
+            </nav>
+
+            {/* ROUTES TO PAGES */}
+            <Route path="/" exact component={Login} />
+            <Route path="/dashboard" component={Dashboard} />
           </div>
     );
   }

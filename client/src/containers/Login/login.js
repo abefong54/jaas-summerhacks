@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { Link , BrowserRouter, Switch, Route} from 'react-router-dom';
-import "./login.css";
-import dashboard from "../Dashboard/dashboard.js";
-import history from '../history';
-
+import { Link } from 'react-router-dom';
+import "./Login.css";
 
 
 class Login extends Component {
@@ -21,8 +18,7 @@ class Login extends Component {
                         <br></br>
                         <input id="password" type="password" required placeholder="Password"></input>
                         <br></br>
-
-                        <a href="">  <button class="btn success" onClick={()=>history.push('/dashboard')}>Log In</button>   </a>
+                        <Link to="/dashboard" className="btn btn-primary">Log In</Link>
                         <br></br>
                         <a href="" class="forgotPass" > Forgot password? Click here.</a>
                       </form>

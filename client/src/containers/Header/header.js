@@ -1,24 +1,16 @@
-import React from 'react'
-import { Header, Segment } from 'semantic-ui-react'
+import React from 'react';
+import './Header.css';
 
-const header = () => (
+class Header extends React.Component{
+    render(){
+        return(
+                <div className="NavBar header_body">
+                    <div className="user">
+                        <h1>Welcome!</h1>
+                    </div>
+                </div>
+        );
+    }
+}
 
-    
-          <Segment clearing>
-          <Header as='h2' floated='right'>
-               Float Right
-          </Header>
-          <Header as='h2' floated='left'>
-                Float Left
-          </Header>
-          </Segment>
-        
-
-
-
-
-   
-
-)
-
-export default header;
+export default Header;
