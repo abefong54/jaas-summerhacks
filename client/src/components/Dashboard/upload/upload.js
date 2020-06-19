@@ -1,42 +1,48 @@
-import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal'
+//THIS IS THE MODAL CODE
+import React, { Component } from "react";
+import { Button } from "react-bootstrap";
+import { Modal } from 'react-bootstrap'
+
 
 function MyVerticallyCenteredModal(props) {
     return (
-        <Modal {...props} className="model-content"
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered>
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Modal Heading
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <div className="container">
-                    Add other fields and selectors
-                </div>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={props.onHide}>Close</Button>
-                <Button variant="primary" onClick={props.onHide}>Upload</Button>
-            </Modal.Footer>
-        </Modal>
-    )
-}
-
-function Upload() {
-    const [modalShow, setModalShow] = React.useState(false);
-
-    return (
-        <>
-            <Button variant="primary" onClick={() => setModalShow(true)}>Upload</Button>
-
-            <MyVerticallyCenteredModal show={modalShow}
-                onHide={() => setModalShow(false)} />
-        </>
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Upload a Video
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <p>Add other stuff</p>
+        </Modal.Body>
+        <Modal.Footer>
+            {/* for now it just closes the modal */}
+          <Button onClick={props.onHide}>Save Changes</Button>
+        </Modal.Footer>
+      </Modal>
     );
-}
+  }
+  
+  function UploadModal() {
+    const [modalShow, setModalShow] = React.useState(false);
+  
+    return (
+      <>
+        <Button variant="primary" onClick={() => setModalShow(true)}>
+          Upload
+        </Button>
+  
+        <MyVerticallyCenteredModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+      </>
+    );
+  }
 
-export default Upload
+  export default UploadModal

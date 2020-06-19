@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import Upload from './upload/upload'
+// import { UploadModal } from './upload/upload'
+import UploadModal from './upload/upload'
 import './dashboard.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Button, ButtonToolbar } from 'react-bootstrap';
 
 
-class Dashboard extends Component{
+class Dashboard extends Component {
+
     // INITIALIZE DEFAULT STATE
     constructor(props) {
         super(props);
         this.state = {
-            apiResponse:"","other": "other stuff"
+            apiResponse: "", "other": "other stuff",
+            show: false
         };
     }
 
@@ -24,18 +29,27 @@ class Dashboard extends Component{
     conponentDidMount() {
         this.callAPI();
     }
-    
+
+    setModalOpen() {
+        this.setState({ show: true });
+    }
+
+    setModalClose() {
+        this.setState({ show: false })
+    }
+
     render() {
         console.log(this.state);
-        return (  
-            <Upload/>
-            // <div>
-            //     <p className="App-intro"> 
-            //         {this.state.apiResponse}
-            //         {this.state.other}
-            //         hiii
-            //     </p>
-            // </div>
+
+        return (
+            <div>
+                <UploadModal />
+                <p className="App-intro">
+                    {this.state.apiResponse}
+                    {this.state.other}
+                    hiii
+                </p>
+            </div>
         );
     }
 
