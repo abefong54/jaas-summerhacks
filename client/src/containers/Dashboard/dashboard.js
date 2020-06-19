@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './dashboard.css';
 import Header from './Header/header';
-import Classes from './Classes/Classes';
+import ClassDropdown from '../../components/ClassDropdown/ClassDropdown';
+//import DropdownClass from '../../components/Dropdown.js';
 
 
 class Dashboard extends Component{
     // INITIALIZE DEFAULT STATE
     constructor(props) {
         super(props);
-        this.state = {apiResponse:"","other": "other stuff"};
+        this.state = {apiResponse: ""};
     }
 
     // FETCH DATA
@@ -20,7 +21,7 @@ class Dashboard extends Component{
     }
 
     // ONCE COMPONENT MOUNTS, CALL API
-    conponentDidMount() {
+    componentDidMount() {
         this.callAPI();
     }
     
@@ -30,13 +31,19 @@ class Dashboard extends Component{
             <div>
                 <p className="App-intro"> 
                     {this.state.apiResponse}
-                    {this.state.other}
+                    
                     hiii
                 </p>
-                <Header />
-                <div className="dropdownClass">
-                      <Classes />
-                    </div>
+                <div>
+                    <Header />
+                </div>
+                <div>
+                    <ClassDropdown />
+                    
+                    
+                </div>
+                
+                
                 
             </div>
         );

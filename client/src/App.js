@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Login from './components/Login/login.js';
+import Login from './containers/Login/login.js';
+
 
 
 class App extends Component {

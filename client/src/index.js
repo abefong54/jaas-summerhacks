@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 
 
 import { BrowserRouter as Router } from 'react-router-dom';
-import Routes from './components/routes';
+import Routes from './containers/routes';
 
 //https://www.youtube.com/watch?v=9Ka1fcn74Hg
 //https://pages.awscloud.com/Search-Your-DynamoDB-Data-with-Amazon-Elasticsearch-Service_1103-ABD_OD.html
