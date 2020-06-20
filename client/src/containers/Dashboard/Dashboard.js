@@ -3,6 +3,7 @@ import './Dashboard.css';
 import ClassDropdown from '../../components/ClassDropdown/ClassDropdown';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
+import Upload from './Upload/upload';
 
 const useStyles = makeStyles({
     root: {
@@ -36,6 +37,7 @@ export default function Dashboard(){
                     <Grid item xs={6}>
                         <div className={classes.dropdown}>
                             <ClassDropdown/>
+                            <Upload />
                         </div> 
                     </Grid>
                     <Grid item xs={12}>
