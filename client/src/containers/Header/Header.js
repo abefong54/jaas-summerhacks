@@ -12,12 +12,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1
   },
   menuButton: {
-    marginRight: theme.spacing(2),
-    color:'black'
+  /*marginRight: theme.spacing(1),*/
+    color:'lightskyblue'
   },
   title: {
     flexGrow: 1,
-    color:'black'
+    color:'lightskyblue'
   },
 }));
 
@@ -26,7 +26,7 @@ export default function Header() {
 
   return (
     <div className={classes.root}>
-      <AppBar style={{ background: 'lightskyblue' }} position="fixed">
+      <AppBar style={{ background: 'black' }} position="fixed">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />

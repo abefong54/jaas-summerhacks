@@ -10,15 +10,16 @@ const useStyles = makeStyles({
       
       
     },
-    welcomBanner:{
-        paddingLeft:'20' ,
+    welcomeBanner:{
+        paddingLeft:'30px',
+        border:'5px solid lightskyblue',
+        borderRadius: '5px',
+        padding:'20px',
+        
             
 
     },
-    dropdown:{
-
-    }
-
+    
 
   });
 
@@ -31,7 +32,7 @@ export default function Dashboard(){
                 <Grid container spacing={3}>
                     <Grid item xs={6}>
                         <div className={classes.welcomeBanner}>
-                            WELCOME BANNER
+                            Welcome back! -- Welcome Banner
                         </div> 
                     </Grid>
                     <Grid item xs={6}>
@@ -41,7 +42,8 @@ export default function Dashboard(){
                         </div> 
                     </Grid>
                     <Grid item xs={12}>
-                        <div className="">
+                        <div style={{paddingLeft:'20px', paddingRight:'20px', paddingBottom:'20px',
+                    border:'2px solid lightskyblue',paddingBottom:'300px'}}>
                             <h1>The Dashboard Body </h1>
                         </div>
                     </Grid>
