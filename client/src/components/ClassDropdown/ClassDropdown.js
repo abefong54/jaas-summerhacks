@@ -52,7 +52,7 @@ export default function ClassDropdown() {
   return (
     <div>
       <Button className={stylings.root} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-        Open Menu
+        Class List
       </Button>
       <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
           {classList.map((className, index) =>

@@ -9,11 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-    background:'red',
-    width:"100%"
-    
-
+    flexGrow: 1
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -38,71 +34,10 @@ export default function Header() {
           <Typography variant="h6" className={classes.title}>
             Welcome
           </Typography>
-          <Button color="black" >Log Out</Button>
+          <Button className={classes.menuButton} >Settings</Button>
+          <Button className={classes.menuButton} >Sign Out</Button>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
-
-
-
-
-
-
-
-/* 
-import React from 'react';
-import './Header.css';
-import { makeStyles, ThemeProvider } from '@material-ui/core';
-
-const useStyles = makeStyles({
-    root: {
-      background: 'lightskyblue',
-      border: 0,
-      borderRadius: 3,
-      
-      color: 'white',
-      fontWeight:'bold',
-      height: 50,
-      width:100,
-      paddingTop: '0 50px',
-      
-    },
-  });
-
-export default function Header(){
-    const stylings = useStyles();
-    return(
-        <div className="NavBar header_body">
-                    <div className="user">
-                        <div className="buttonsHeader">
-                        <button className={stylings.root}>Settings</button>
-                        <button className={stylings.root}>Log Out</button>
-                        </div>
-                    <h1>Welcome!</h1>
-                    </div>
-                </div>
-
-
-    )
-} */
-/* class Header extends React.Component{
-    render(){
- */
-       /*  return(
-                
-                <div className="NavBar header_body">
-                    <div className="user">
-                        <div className="buttonsHeader">
-                        <button className="Settings">Settings</button>
-                        <button className="Logout">Log Out</button>
-                        </div>
-                    <h1>Welcome!</h1>
-                    </div>
-                </div>
-        );
-    }
-} */
-
-/* export default Header; */
