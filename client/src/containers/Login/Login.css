@@ -15,10 +15,11 @@ body{
   #email,#password{
     height:30px;
     width:300px;
-    border-radius: 5px;;
+    border-radius: 5px;
+    font-size: 20px;
   }
   
-  .btn {
+  .loginbutton {
     border: 1px outset;
     border-radius: 5px;
     background-color: black;

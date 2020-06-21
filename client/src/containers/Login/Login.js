@@ -18,7 +18,7 @@ class Login extends Component {
                         <br></br>
                         <input id="password" type="password" required placeholder="Password"></input>
                         <br></br>
-                        <Link to="/dashboard" className="btn btn-primary">Log In</Link>
+                        <Link to="/dashboard" className="loginbutton">Log In</Link>
                         <br></br>
                         <a href="" class="forgotPass" > Forgot password? Click here.</a>
                       </form>

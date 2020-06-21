@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
   /*marginRight: theme.spacing(1),*/
-    color:'lightskyblue'
+    color:'lightskyblue',
+   
   },
   title: {
     flexGrow: 1,
@@ -35,7 +37,8 @@ export default function Header() {
             Welcome
           </Typography>
           <Button className={classes.menuButton} >Settings</Button>
-          <Button className={classes.menuButton} >Sign Out</Button>
+          <Link to="/" className={classes.menuButton} >SIGN OUT</Link>
+          {/* <Button Link to= "/ "className={classes.menuButton} >Sign Out</Button> */}
         </Toolbar>
       </AppBar>
     </div>

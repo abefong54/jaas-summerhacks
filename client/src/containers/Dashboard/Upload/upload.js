@@ -1,10 +1,28 @@
 //THIS IS THE MODAL CODE
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
-import { Modal } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  root: {
+    background: 'black',
+    border: 0,
+    borderRadius: 5,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    color:'#87cefa' ,
+    height: 45,
+    width: 140,
+    padding: '0 30px',
+    weight: 'bold',
+    
+  },
+});
 
 
 function MyVerticallyCenteredModal(props) {
+    const styles=useStyles();
+  
     return (
       <Modal
         {...props}
@@ -22,19 +40,22 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Body>
         <Modal.Footer>
             {/* for now it just closes the modal */}
-          <Button onClick={props.onHide}>Save Changes</Button>
+          <Button className={styles.root}onClick={props.onHide}>Save</Button>
         </Modal.Footer>
       </Modal>
     );
   }
   
   function UploadModal() {
+
+    const styles=useStyles();
+
     const [modalShow, setModalShow] = React.useState(false);
   
     return (
       <>
-        <Button variant="primary" onClick={() => setModalShow(true)}>
-          Upload
+        <Button className={styles.root}variant="primary" onClick={() => setModalShow(true)}>
+          UPLOAD
         </Button>
   
         <MyVerticallyCenteredModal
