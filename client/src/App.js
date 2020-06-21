@@ -29,7 +29,7 @@ class App extends Component {
                 <Grid item xs={12}> 
                     <Route path="/" exact component={Login} />
                     <Route path="/dashboard" component={Dashboard} />
-                    <Route path="/" exact component={Login}/>
+                    
                 </Grid>
               </Grid>
 
