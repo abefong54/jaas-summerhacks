@@ -4,6 +4,7 @@ import ClassDropdown from '../../components/ClassDropdown/ClassDropdown';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import Upload from './Upload/upload';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const useStyles = makeStyles({
     root: {
