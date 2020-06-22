@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 import './Dashboard.css';
 import ClassDropdown from '../../components/ClassDropdown/ClassDropdown';
 import Grid from '@material-ui/core/Grid';
@@ -41,6 +41,8 @@ export default function Dashboard(){
                         <div className={classes.dropdown}>
                             <ClassDropdown/>
                             <Upload />
+                            <Link to="/analytics" ><button>Take me to dashboard</button></Link>
+                            
                         </div> 
                     </Grid>
                     <Grid item xs={12}>
