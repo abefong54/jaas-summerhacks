@@ -20,7 +20,7 @@ class Login extends Component {
                         <br></br>
                         <Link to="/dashboard" className="loginbutton">Log In</Link>
                         <br></br>
-                        <a href="" class="forgotPass" > Forgot password? Click here.</a>
+                        <a href="" className="forgotPass" > Forgot password? Click here.</a>
                       </form>
                   </div>
               </div>
