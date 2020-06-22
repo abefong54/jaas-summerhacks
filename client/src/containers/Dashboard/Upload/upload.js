@@ -12,8 +12,8 @@ const config = {
   bucketName: 's3-bucket-v2',
   dirName: 'test-send',
   region: 'us-east-2',
-  accessKeyId: 'AKIA3ENAIKTKZUXDR5EH',
-  secretAccessKey: ' 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'
+  accessKeyId: '',
+  secretAccessKey: ' '
 }
 
 class UploadModal extends Component {
