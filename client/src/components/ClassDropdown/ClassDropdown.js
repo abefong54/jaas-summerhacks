@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import MenuLink from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles({
     root: {
@@ -14,7 +16,6 @@ const useStyles = makeStyles({
       height: 48,
       padding: '0 30px',
       weight: 'bold',
-      
     },
   });
 
@@ -26,6 +27,10 @@ export default function ClassDropdown() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [classList, setClassList] = React.useState([]);
 
+
+  const [firstName, setFirstName] = React.useState(null);
+  const [lastName, setLastName] = React.useState(null);
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -34,29 +39,40 @@ export default function ClassDropdown() {
     setAnchorEl(null);
   };
 
+  const styles = theme => ({
+    root: {
+      background: "blue",
+    },
+    whiteColor: {
+      color: "white"
+    }
+  });
 
-  useEffect(() => {
-    fetch(
-      // `https://jsonplaceholder.typicode.com/todos/1`,
-      `http://localhost:9000/resources/dashboard`,
-    )
-      .then(response => response.json())
-      .then(response => console.log(response.classes))
-      // .then(response => setClassList(classList))
-      .catch(error => console.log(error));
-  }, [page]);
+  React.useEffect(() => {
+    fetch('http://localhost:9000/resources/dashboard')
+      .then(results => results.json())
+      .then(data => {
+        console.log(data);
+        const classes = data.results;
+        console.log("results");
+        console.log(classes);
+        setClassList(data.classes);
+      });
+  }, []); // <-- Have to pass in [] here!
+
 
   console.log("Classlist");
   console.log(classList);
+  console.log("----------");
 
   return (
     <div>
       <Button className={stylings.root} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
         Class List
       </Button>
-      <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+      <Menu color='black' id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
           {classList.map((className, index) =>
-            <MenuItem key={index} value={index} primaryText={className} />
+            <MenuItem color='black'  key={index} value={className}/>
           )}
       </Menu>
     </div>
