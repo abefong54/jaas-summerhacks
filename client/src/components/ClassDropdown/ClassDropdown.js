@@ -52,19 +52,11 @@ export default function ClassDropdown() {
     fetch('http://localhost:9000/resources/dashboard')
       .then(results => results.json())
       .then(data => {
-        console.log(data);
         const classes = data.results;
-        console.log("results");
-        console.log(classes);
         setClassList(data.classes);
       });
   }, []); // <-- Have to pass in [] here!
-
-
-  console.log("Classlist");
-  console.log(classList);
-  console.log("----------");
-
+  
   return (
     <div>
       <Button className={stylings.root} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
@@ -72,7 +64,7 @@ export default function ClassDropdown() {
       </Button>
       <Menu color='black' id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
           {classList.map((className, index) =>
-            <MenuItem color='black'  key={index} value={className}/>
+            <MenuItem color='black'  key={index} value={className}>{className}</MenuItem>
           )}
       </Menu>
     </div>

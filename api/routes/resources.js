@@ -6,11 +6,16 @@ const config = require('../config.json');
 
 const aws_access_key_id =  config.development.aws_access_key_id;
 const aws_secret_access_key = config.development.aws_secret_access_key;
-AWS.config.update({region:config.development.region});
+var creds = new AWS.Credentials({
+  accessKeyId:  aws_access_key_id, secretAccessKey: aws_secret_access_key
+});
+AWS.config.update({region:config.development.region,credentials:creds});
 
-var dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
+/* var dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'}); */
+var docClient = new AWS.DynamoDB.DocumentClient();
 
-var params = {
+
+/* var params = {
     RequestItems: {
      "video": {
        Keys: [
@@ -23,20 +28,50 @@ var params = {
        ProjectionExpression: "class_name"
       }
     }
+}; */
+
+var params = {
+  TableName: "video"
+  
+
 };
 
-dynamodb.batchGetItem(params, function (err, data) {
-  if (err) console.log(err, err.stack); // an error occurred
-  else     console.log(data);           // successful response
-});
 
+function getClassSet(err, data) {
+ //RETURN A SET OF CLASSNAMES
+  if (err) {
+      console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
+  } else {        
+      console.log("Scan succeeded.");
+      data.Items.forEach(function(itemdata) {
+         console.log("Item :",JSON.stringify(itemdata["class_name"]));
+
+
+      });
+      return 100;
+       
+      // continue scanning if we have more items
+      if (typeof data.LastEvaluatedKey != "undefined") {
+          console.log("Scanning for more...");
+          params.ExclusiveStartKey = data.LastEvaluatedKey;
+          docClient.scan(params, onScan);
+      }
+  }
+}
+
+
+console.log('done');
 router.get("/dashboard", function(req, res, next) {
     var response = {};
-    let classes = ["BIO 2112", "MATH 2332", "CHEM 4003", "CS 3443"];
+    //GETTING CLASS NAMES FROM ON SCAN FN TO GET FN
+    
+    //let classes = docClient.scan(params, getClassSet);
+    return docClient.scan(params, getClassSet);
     response['classes'] = classes;
 
 
     res.send(response);
 });
+
 
 module.exports = router;
