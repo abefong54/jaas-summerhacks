@@ -11,8 +11,9 @@ var creds = new AWS.Credentials({
 });
 AWS.config.update({region:config.development.region,credentials:creds});
 
-/* var dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'}); */
-var docClient = new AWS.DynamoDB.DocumentClient();
+var dynamodbService = new AWS.DynamoDB({apiVersion: '2012-08-10'});
+
+var dynamoDocumentClient = new AWS.DynamoDB.DocumentClient();
 
 
 /* var params = {
@@ -30,51 +31,71 @@ var docClient = new AWS.DynamoDB.DocumentClient();
     }
 }; */
 
-var params = {
-  TableName: "video"
-  
 
-};
+// function getClassSet(err, data) {
+//   //RETURN A SET OF CLASSNAMES
+//     if (err) {
 
-var a = new Set()
-function getClassSet(err, data) {
- //RETURN A SET OF CLASSNAMES
-  if (err) {
-      console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
-  } else {        
-      console.log("Scan succeeded.");
-      data.Items.forEach(function(itemdata) {
-         
-         a.add(JSON.stringify(itemdata["class_name"]));
+//         console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
+    
+//       } else {
+
+//       var classSet = new Set()
+//       console.log("Scan succeeded.");
+
+//       data.Items.forEach(function(itemdata) {
+//           console.log("class name : " + itemdata["class_name"]);
+//           classSet.add(JSON.stringify(itemdata["class_name"]));
+//       })
+
+//       // continue scanning if we have more items
+//       if (typeof data.LastEvaluatedKey != "undefined") {
+//           console.log("Scanning for more...");
+//           params.ExclusiveStartKey = data.LastEvaluatedKey;
+//           docClient.scan(params, onScan);
+//       }
+//       return classSet;
+//     }
+// }
 
 
+// Scan table for all items using the Document Client
+async function scanForResultsDdbDc()  {
+  try {
+
+      // DEFINE TABLE FOR QUERY 
+      var params = {
+        TableName: "video"
+      };
+
+      // CONNECT TO TABLE
+      var result = await dynamoDocumentClient.scan(params).promise()
+      var classSet = new Set()
+
+      // CREATE RETURN OBJECT
+      result.Items.forEach(function(itemdata) {
+          classSet.add(itemdata["class_name"]);
       })
-     console.log(a)
-      
-      
-      
-       
-      // continue scanning if we have more items
-      if (typeof data.LastEvaluatedKey != "undefined") {
-          console.log("Scanning for more...");
-          params.ExclusiveStartKey = data.LastEvaluatedKey;
-          docClient.scan(params, onScan);
-      }
-     // return a; to return to the function below to get fn
+
+      return classSet;
+
+  } catch (error) {
+      console.error(error);
+      return error;
   }
 }
 
 
-console.log('done');
-router.get("/dashboard", function(req, res, next) {
-    var response = {};
+
+
+
+router.get("/dashboard", async function(req, res, next) {
+    var response = [];
     //GETTING CLASS NAMES FROM ON SCAN FN TO GET FN
-
-    
-    //let classes = docClient.scan(params, getClassSet);
-    return docClient.scan(params, getClassSet);
-    response['classes'] = classes;
-
+    var dbResponse = await scanForResultsDdbDc();
+    dbResponse.forEach(function(val) {
+        response.push(val);
+    });
 
     res.send(response);
 });
