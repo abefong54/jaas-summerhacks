@@ -9,22 +9,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const useStyles = makeStyles({
     root: {
-      
-      
     },
     welcomeBanner:{
         paddingLeft:'30px',
         border:'5px solid lightskyblue',
         borderRadius: '5px',
         padding:'20px',
-        
-            
-
     },
-    
-
   });
-
 
 export default function Dashboard(){
     const classes= useStyles();
@@ -46,9 +38,9 @@ export default function Dashboard(){
                         </div> 
                     </Grid>
                     <Grid item xs={12}>
-                        <div style={{paddingLeft:'20px', paddingRight:'20px', paddingBottom:'20px',
-                    border:'2px solid lightskyblue',paddingBottom:'300px'}}>
+                        <div style={{paddingLeft:'20px', paddingRight:'20px', paddingBottom:'20px',border:'2px solid lightskyblue',paddingBottom:'300px'}}>
                             <h1>The Dashboard Body </h1>
+                            {/* CREATE DASHBOARD COMPONENT */}
                         </div>
                     </Grid>
                 </Grid>
