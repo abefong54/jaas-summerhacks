@@ -36,7 +36,7 @@ var params = {
 
 };
 
-
+var a = new Set()
 function getClassSet(err, data) {
  //RETURN A SET OF CLASSNAMES
   if (err) {
@@ -44,11 +44,15 @@ function getClassSet(err, data) {
   } else {        
       console.log("Scan succeeded.");
       data.Items.forEach(function(itemdata) {
-         console.log("Item :",JSON.stringify(itemdata["class_name"]));
+         
+         a.add(JSON.stringify(itemdata["class_name"]));
 
 
-      });
-      return 100;
+      })
+     console.log(a)
+      
+      
+      
        
       // continue scanning if we have more items
       if (typeof data.LastEvaluatedKey != "undefined") {
@@ -56,6 +60,7 @@ function getClassSet(err, data) {
           params.ExclusiveStartKey = data.LastEvaluatedKey;
           docClient.scan(params, onScan);
       }
+     // return a; to return to the function below to get fn
   }
 }
 
@@ -64,6 +69,7 @@ console.log('done');
 router.get("/dashboard", function(req, res, next) {
     var response = {};
     //GETTING CLASS NAMES FROM ON SCAN FN TO GET FN
+
     
     //let classes = docClient.scan(params, getClassSet);
     return docClient.scan(params, getClassSet);
