@@ -49,13 +49,12 @@ export default function ClassDropdown() {
   });
 
   React.useEffect(() => {
-    fetch('http://localhost:9000/resources/dashboard')
+    fetch('http://localhost:9000/resources/dashboard/dropdown')
       .then(results => results.json())
       .then(data => {
-        const classes = data.results;
-        setClassList(data.classes);
+        setClassList(data);
       });
-  }, []); // <-- Have to pass in [] here!
+  }, []);
   
   return (
     <div>

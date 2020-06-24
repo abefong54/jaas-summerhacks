@@ -6,77 +6,85 @@ const config = require('../config.json');
 
 const aws_access_key_id =  config.development.aws_access_key_id;
 const aws_secret_access_key = config.development.aws_secret_access_key;
+
 var creds = new AWS.Credentials({
   accessKeyId:  aws_access_key_id, secretAccessKey: aws_secret_access_key
 });
 AWS.config.update({region:config.development.region,credentials:creds});
 
-/* var dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'}); */
-var docClient = new AWS.DynamoDB.DocumentClient();
+var dynamoDocumentClient = new AWS.DynamoDB.DocumentClient();
 
 
-/* var params = {
-    RequestItems: {
-     "video": {
-       Keys: [
-          {
-         "class_name": {
-             S:'Biology'
-          }
-        }
-       ], 
-       ProjectionExpression: "class_name"
-      }
-    }
-}; */
+// Scan table for all items using the Document Client
+async function getClasslistSet()  {
+  try {
 
-var params = {
-  TableName: "video"
-  
+      // DEFINE TABLE FOR QUERY 
+      var params = {
+        TableName: "video"
+      };
 
-};
+      // CONNECT TO TABLE
+      var result = await dynamoDocumentClient.scan(params).promise()
+      var classSet = new Set()
+      var emotions = {};
 
-var classSet = new Set()
-function getClassSet(err, data) {
- //RETURN A SET OF CLASSNAMES
-  if (err) {
-      console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
-  } else {        
-      console.log("Scan succeeded.");
-      data.Items.forEach(function(itemdata) {
-         
-         classSet.add(JSON.stringify(itemdata["class_name"]));
-
-
+      // CREATE RETURN OBJECT
+      result.Items.forEach(function(itemdata) {
+          classSet.add(itemdata["class_name"]);
       })
-     console.log(classSet)
-      
-      
-      
-       
-      // continue scanning if we have more items
-      if (typeof data.LastEvaluatedKey != "undefined") {
-          console.log("Scanning for more...");
-          params.ExclusiveStartKey = data.LastEvaluatedKey;
-          docClient.scan(params, onScan);
-      }
-     // return classSet; to return to the function below to get fn
+
+      return classSet;
+
+  } catch (error) {
+      console.error(error);
+      return error;
   }
 }
 
 
-console.log('done');
-router.get("/dashboard", function(req, res, next) {
-    var response = {};
+// TODO - RETURN PROPERLY
+async function getVideoListByClassName(className){
+  try {
+      var params = {
+          KeyConditionExpression: 'class_name = :class_name',
+          ExpressionAttributeValues: {
+              ':class_name': className
+          },
+          TableName: "video"
+      };
+      var result = await dynamoDocumentClient.query(params).promise()
+      console.log(JSON.stringify(result))
+  } catch (error) {
+      console.error(error);
+  }
+}
+
+
+
+// GET CLASS LISTS FOR DROPDOWN
+router.get("/dashboard/dropdown", async function(req, res, next) {
+    var response = [];
     //GETTING CLASS NAMES FROM ON SCAN FN TO GET FN
-    
-    
-    //let classes = docClient.scan(params, getClassSet);
-    return docClient.scan(params, getClassSet);
-    response['classes'] = classes;
-
-
+    var dbResponse = await getClasslistSet();
+    dbResponse.forEach(function(val) {
+        response.push(val);
+    });
     res.send(response);
+});
+
+// GET VIDEO LIST FOR TABLE
+router.get("/dashboard/table:className", async function(req, res, next) {
+    var response = [];
+    //GETTING CLASS NAMES FROM ON SCAN FN TO GET FN
+    var classname = req.body;
+
+    //  update get video list data to only get videos for class name in request
+    var dbResponse = await getVideoListData(classname);
+    // dbResponse.forEach(function(val) {
+    //     response.push(val);
+    // });
+    res.send(dbResponse);
 });
 
 
