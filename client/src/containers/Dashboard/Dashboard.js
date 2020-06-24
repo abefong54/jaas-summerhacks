@@ -5,6 +5,7 @@ import ClassDropdown from '../../components/ClassDropdown/ClassDropdown';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import Upload from './Upload/upload';
+import ClassTable from '../../components/ClassTable/ClassTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const useStyles = makeStyles({
@@ -29,11 +30,19 @@ export default function Dashboard(){
                             Welcome back! -- Welcome Banner
                         </div> 
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={2}>
                         <div className={classes.dropdown}>
                             <ClassDropdown/>
+                            
+                            <Link to="/analytics" ><button className={classes.dropdown}>---></button></Link>
+                            
+                        </div> 
+                    </Grid>
+                    <Grid item xs={2}>
+                        <div className={classes.dropdown}>
+                            
                             <Upload />
-                            <Link to="/analytics" ><button>Take me to dashboard</button></Link>
+                            
                             
                         </div> 
                     </Grid>
@@ -41,6 +50,7 @@ export default function Dashboard(){
                         <div style={{paddingLeft:'20px', paddingRight:'20px', paddingBottom:'20px',border:'2px solid lightskyblue',paddingBottom:'300px'}}>
                             <h1>The Dashboard Body </h1>
                             {/* CREATE DASHBOARD COMPONENT */}
+                            <ClassTable/>
                         </div>
                     </Grid>
                 </Grid>
