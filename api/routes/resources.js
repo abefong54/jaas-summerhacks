@@ -59,7 +59,6 @@ async function getVideoListByClassName(className){
       console.error(error);
   }
 }
-logSongsByArtistDdbDc()
 
 
 
