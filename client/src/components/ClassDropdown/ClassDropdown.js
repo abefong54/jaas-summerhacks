@@ -26,6 +26,7 @@ export default function ClassDropdown() {
   const [page] = React.useState(1);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [classList, setClassList] = React.useState([]);
+  const [videoList, setVideoList] = React.useState([]);
 
 
   const [firstName, setFirstName] = React.useState(null);
@@ -55,15 +56,26 @@ export default function ClassDropdown() {
         setClassList(data);
       });
   }, []);
+
+  function sayHello(name) {
+      fetch(`http://localhost:9000/resources/dashboard/class-videos?classname=${name}`)
+      // .then(results => results.json())
+      .then(results => {
+        setVideoList(results);
+      });
+      console.log("Hello " + name);
+      console.log("videolist " , videoList);
+    }
+    console.log("videlist ", videoList);
   
   return (
     <div>
       <Button className={stylings.root} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-        Class List
+        CLASSES
       </Button>
-      <Menu color='black' id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+      <Menu color='black' id="simple-menu" anchorEl={anchorEl} getContentAnchorEl={null} anchorOrigin={{ vertical: "bottom", horizontal: "center" }} transformOrigin={{ vertical: "top", horizontal: "center" }}keepMounted open={Boolean(anchorEl)} onClose={handleClose} drop={'right'}>
           {classList.map((className, index) =>
-            <MenuItem color='black'  key={index} value={className}>{className}</MenuItem>
+            <MenuItem color='black'  key={index} value={className} onClick={() => sayHello(className)}>{className}</MenuItem>
           )}
       </Menu>
     </div>

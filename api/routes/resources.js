@@ -74,17 +74,21 @@ router.get("/dashboard/dropdown", async function(req, res, next) {
 });
 
 // GET VIDEO LIST FOR TABLE
-router.get("/dashboard/table:className", async function(req, res, next) {
-    var response = [];
-    //GETTING CLASS NAMES FROM ON SCAN FN TO GET FN
-    var classname = req.body;
+router.get("/dashboard/class-videos", async function(req, res, next) {
+    var id = req.query.classname; // $_GET["id"]
+    console.log('Heres the payload:' + id);
 
-    //  update get video list data to only get videos for class name in request
-    var dbResponse = await getVideoListData(classname);
-    // dbResponse.forEach(function(val) {
+    var response = ["Cool"];
+    // //GETTING CLASS NAMES FROM ON SCAN FN TO GET FN
+    // var classname = req.body;
+
+    // //  update get video list data to only get videos for class name in request
+    // var dbResponse = await getVideoListData(classname);
+    // // dbResponse.forEach(function(val) {
     //     response.push(val);
     // });
-    res.send(dbResponse);
+
+    res.send({"message": response});
 });
 
 
