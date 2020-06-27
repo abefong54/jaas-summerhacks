@@ -7,6 +7,7 @@ import Login from './containers/Login/Login.js';
 import Dashboard from './containers/Dashboard/Dashboard.js';
 import Footer from './containers/Footer/Footer.js';
 import Grid from '@material-ui/core/Grid';
+import Analytics from './containers/Analytics/Analytics';
 
 
 class App extends Component {
@@ -27,6 +28,8 @@ class App extends Component {
                 <Grid item xs={12}> 
                     <Route path="/" exact component={Login} />
                     <Route path="/dashboard" component={Dashboard} />
+                    <Route path="/analytics" component={Analytics} />
+                   
                 </Grid>
               </Grid>
 
