@@ -10,15 +10,17 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
   table: {
-    width:"500",
-    height:"500",
-    backgroundColor:'lightskyblue'
+    //width:"auto", WORKS IN RESPONSIVENESS, SO NOT NEEDED.
+    tableLayout:"auto",
+    backgroundColor:'lightskyblue',
+    fixedHeader:"false"
   },
+  
 });
 
 //FIGURE THIS OUT LATER
-function createData(name, calories, fat) {
-  return { name, calories, fat};
+function createData(name, day , prof) {
+  return { name, day, prof};
 }
 
 const rows = [
@@ -39,9 +41,9 @@ export default function ClassTable() {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Lecture Name</TableCell>
-            <TableCell align="right">Day</TableCell>
-            <TableCell align="right">Teacher</TableCell>
+            <TableCell width="200" >Lecture Name</TableCell>
+            <TableCell width="200" align="left">Day</TableCell>
+            <TableCell width="200" align="left">Teacher</TableCell>
          
           </TableRow>
         </TableHead>
@@ -51,8 +53,8 @@ export default function ClassTable() {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
+              <TableCell align="left">{row.day}</TableCell>
+              <TableCell align="left">{row.prof}</TableCell>
          
             </TableRow>
           ))}

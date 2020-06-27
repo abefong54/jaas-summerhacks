@@ -30,7 +30,7 @@ export default function Dashboard(){
                             Welcome back! -- Welcome Banner
                         </div> 
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={3}>
                         <div className={classes.dropdown}>
                             <ClassDropdown/>
                             
@@ -38,7 +38,7 @@ export default function Dashboard(){
                             
                         </div> 
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={3}>
                         <div className={classes.dropdown}>
                             
                             <Upload />
