@@ -5,60 +5,29 @@ import { Modal } from 'react-bootstrap'
 import S3 from 'react-aws-s3';
 import ReactS3Uploader from 'react-s3-uploader-multipart'
 import { uploadFile } from 'react-s3'
-import './upload.css'
+import './Upload.css'
 import swal from 'sweetalert'
-import config from '../../../config.json'
+import config from '../../config.json'
 
 class UploadModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
       response: '',
       post: '',
       responseToPost: '',
-
       modalShow: false,
       file: null,
       valueName: '',
       config: {
         bucketName: 's3-bucket-v2',
-        // url: 'https://s3-bucket-v2.s3-us-west-2.amazonaws.com/',
         dirName: 'test-send',
         region: 'us-east-2',
-        accessKeyId: config.API_ACCESS_KEY,
-        secretAccessKey: config.SECRET_ACCESS_KEY,
+        accessKeyId: config.aws_access_key_id,
+        secretAccessKey: config.aws_secret_access_key,
       }
     }
   }
-
-  // componentDidMount() {
-  //   this.callApi()
-  //     .then(res => this.setState({ response: res.express }))
-  //     .catch(err => console.log(err));
-  // }
-
-  // callApi = async () => {
-  //   const response = await fetch('http://localhost:9000/resources/dashboard');
-  //   const body = await response.json();
-  //   if (response.status !== 200) throw Error(body.message);
-  //   return body;
-  // }
-
-  // handleApiPost = async e => {
-  //   e.preventDefault();
-  //   const response = await fetch('http://localhost:9000/resources/dashboardPost', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ post: this.state.post }),
-  //   });
-
-  //   const body = await response.text();
-
-  //   this.setState({ responseToPost: body });
-  // }
 
   showModal = () => {
     this.setState({ modalShow: true });
@@ -69,7 +38,6 @@ class UploadModal extends Component {
 
   handleFileChange = (event) => {
     this.setState({ file: event.target.files[0] });
-    // this.setState({ fileName: event.target.files[0].name });
   }
 
   handleTextChange = (event) => {
@@ -92,15 +60,6 @@ class UploadModal extends Component {
       .then(data => this.uponSuccessfulUpload(data))
       .catch(err => console.error(err))
   }
-
-  // checkEmpty = () => {
-  //   console.log(process.env.REACT_APP_API_ACCESS_KEY);
-  //   // if (this.state.file === null) {
-  //   //     console.log('shits empty')
-  //   // } else {
-  //   //     console.log(this.state.file)
-  //   // }
-  // }
 
   render() {
     return (
@@ -125,21 +84,6 @@ class UploadModal extends Component {
               <input type='text' onChange={this.handleTextChange}/>
             </div>
 
-            {/* Stuff for testing api calls */}
-
-            {/* <p>{this.state.response}</p>
-            <form onSubmit={this.handleApiPost}>
-              <p>
-                <strong>Post to Server:</strong>
-              </p>
-              <input
-                type="text"
-                value={this.state.post}
-                onChange={e => this.setState({ post: e.target.value })}
-              />
-              <button type="submit">Submit</button>
-            </form>
-            <p>{this.state.responseToPost}</p> */}
           </Modal.Body>
           <Modal.Footer>
             {/* for now it just closes the modal */}
