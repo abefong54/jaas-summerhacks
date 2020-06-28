@@ -105,16 +105,5 @@ router.get("/dashboard/class-videos", async function(req, res, next) {
     res.send(response);
 });
 
-<<<<<<< HEAD
-// testing api post request
-// router.post("/dashboardPost", function(req, res){
-//     console.log(req.body);
-//     res.send(
-//         `post received:  ${req.body.post}`
-//     )
-// });
-
-=======
->>>>>>> master
 
 module.exports = router;
