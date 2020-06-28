@@ -30,21 +30,18 @@ export default function Dashboard(){
                             Welcome back! -- Welcome Banner
                         </div> 
                     </Grid>
-                    <Grid item xs={3}>
-                        <div className={classes.dropdown}>
-                            <ClassDropdown/>
-                            
-                            <Link to="/analytics" ><button className={classes.dropdown}>---></button></Link>
-                            
-                        </div> 
-                    </Grid>
-                    <Grid item xs={3}>
-                        <div className={classes.dropdown}>
-                            
-                            <Upload />
-                            
-                            
-                        </div> 
+                    <Grid item xs={6}>
+                        <Grid container spacing={4}>
+                            <Grid item xs={2}>
+                                <ClassDropdown/>
+                            </Grid>
+                            <Grid item xs={2}>
+                                <Upload />
+                            </Grid>
+                            <Grid item xs={2}>
+                                <Link to="/analytics" ><button>Take me to dashboard</button></Link>
+                            </Grid>
+                        </Grid>
                     </Grid>
                     <Grid item xs={12}>
                         <div style={{paddingLeft:'20px', paddingRight:'20px', paddingBottom:'20px',border:'2px solid lightskyblue',paddingBottom:'300px'}}>

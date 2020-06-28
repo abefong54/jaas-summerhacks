@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     borderRadius: 5,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     color:'#87cefa' ,
-    height: 45,
+    height: 48,
     width: 140,
     padding: '0 30px',
     weight: 'bold',
