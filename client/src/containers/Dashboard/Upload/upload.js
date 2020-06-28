@@ -6,6 +6,7 @@ import S3 from 'react-aws-s3';
 import ReactS3Uploader from 'react-s3-uploader-multipart'
 import { uploadFile } from 'react-s3'
 import './upload.css'
+import config from '../../config.json'
 
 class UploadModal extends Component {
   constructor(props) {
@@ -24,39 +25,39 @@ class UploadModal extends Component {
         // url: 'https://s3-bucket-v2.s3-us-west-2.amazonaws.com/',
         dirName: 'test-send',
         region: 'us-east-2',
-        accessKeyId: "AKIA3ENAIKTK2KB2V5HQ",
-        secretAccessKey: "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",
+        accessKeyId: config.API_ACCESS_KEY,
+        secretAccessKey: config.SECRET_ACCESS_KEY,
       }
     }
   }
 
-  componentDidMount() {
-    this.callApi()
-      .then(res => this.setState({ response: res.express }))
-      .catch(err => console.log(err));
-  }
+  // componentDidMount() {
+  //   this.callApi()
+  //     .then(res => this.setState({ response: res.express }))
+  //     .catch(err => console.log(err));
+  // }
 
-  callApi = async () => {
-    const response = await fetch('http://localhost:9000/resources/dashboard');
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  }
+  // callApi = async () => {
+  //   const response = await fetch('http://localhost:9000/resources/dashboard');
+  //   const body = await response.json();
+  //   if (response.status !== 200) throw Error(body.message);
+  //   return body;
+  // }
 
-  handleApiPost = async e => {
-    e.preventDefault();
-    const response = await fetch('http://localhost:9000/resources/dashboardPost', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ post: this.state.post }),
-    });
+  // handleApiPost = async e => {
+  //   e.preventDefault();
+  //   const response = await fetch('http://localhost:9000/resources/dashboardPost', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ post: this.state.post }),
+  //   });
 
-    const body = await response.text();
+  //   const body = await response.text();
 
-    this.setState({ responseToPost: body });
-  }
+  //   this.setState({ responseToPost: body });
+  // }
 
   showModal = () => {
     this.setState({ modalShow: true })
