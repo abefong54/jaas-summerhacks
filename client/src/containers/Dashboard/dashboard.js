@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UploadModal from './Upload/upload'
+import MultipartUpload from './Upload/multipart-upload'
 import './dashboard.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ClassDropdown from '../../components/ClassDropdown/ClassDropdown';
@@ -42,7 +43,8 @@ class Dashboard extends Component{
         // AND A TABLE WITH VIDEOS BELONGING TO A CLASS
         return (  
             <div>
-                <UploadModal/>
+                <MultipartUpload/>
+                {/* <UploadModal/> */}
                 <ClassDropdown/>
             </div>
         );

@@ -2,71 +2,104 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Modal } from 'react-bootstrap'
-
 import S3 from 'react-aws-s3';
-// import S3FileUpload from 'react-s3'
-
+import ReactS3Uploader from 'react-s3-uploader-multipart'
 import { uploadFile } from 'react-s3'
+import './upload.css'
 
-const config = {
-  bucketName: 's3-bucket-v2',
-  dirName: 'test-send',
-  region: 'us-east-2',
-  accessKeyId: 'AKIA3ENAIKTKZUXDR5EH',
-  secretAccessKey: ' 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'
-}
 
 class UploadModal extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props);
     this.state = {
-      testFlie: 'testing',
+
+      response: '',
+      post: '',
+      responseToPost: '',
+
       modalShow: false,
       file: null,
-      value: '',
+      valueName: '',
       config: {
         bucketName: 's3-bucket-v2',
+        // url: 'https://s3-bucket-v2.s3-us-west-2.amazonaws.com/',
         dirName: 'test-send',
         region: 'us-east-2',
-        accessKeyId: 'AKIA3ENAIKTKZUXDR5EH',
-        secretAccessKey: ' 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'
+        accessKeyId: "AKIA3ENAIKTK2KB2V5HQ",
+        secretAccessKey: "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",
       }
     }
-
-    this.showModal = this.showModal.bind(this);
-    this.hideModal = this.hideModal.bind(this);
-    this.handleFileUpload = this.handleFileUpload.bind(this);
   }
-  showModal() {
+
+  componentDidMount() {
+    this.callApi()
+      .then(res => this.setState({ response: res.express }))
+      .catch(err => console.log(err));
+  }
+
+  callApi = async () => {
+    const response = await fetch('http://localhost:9000/resources/dashboard');
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  }
+
+  handleApiPost = async e => {
+    e.preventDefault();
+    const response = await fetch('http://localhost:9000/resources/dashboardPost', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ post: this.state.post }),
+    });
+
+    const body = await response.text();
+
+    this.setState({ responseToPost: body });
+  }
+
+  showModal = () => {
     this.setState({ modalShow: true })
   }
-  hideModal() {
+  hideModal = () => {
     this.setState({ modalShow: false })
   }
 
-  uploadIT = () => {
-    console.log("uploading files");
-    // S3FileUpload
-    //   .uploadFile(this.state.file, config)
-    //   .then(data => console.log(data))
-    //   .catch(err => console.error(err))
-    
-    const ReactS3Client = new S3(config);
+  handleFileChange = (event) => {
+    this.setState({ file: event.target.files[0] });
+    // this.setState({ fileName: event.target.files[0].name });
+  }
+
+  handleTextChange = (event) => {
+    console.log('file name: ' + event.target.value);
+    this.setState({ fileName: event.target.value });
+  }
+
+  uponSuccessfulUpload = data => {
+    console.log(data);
+  }
+
+  handleFileUpload = () => {
+
+    console.log("uploading " + this.state.fileName);
+
+    const ReactS3Client = new S3(this.state.config);
     ReactS3Client
-    .uploadFile(this.state.file, this.testFlie)
-    .then(data => console.log(data))
-    .catch(err => console.error(err))
+      .uploadFile(this.state.file, this.state.fileName)
+      .then(data => this.uponSuccessfulUpload(data))
+      .catch(err => console.error(err))
   }
-  // handleFileUpload = event => {
-  //   this.state.file = event.target.files[0];
-  //   console.log("file is here");
+
+  // checkEmpty = () => {
+  //   console.log(process.env.REACT_APP_API_ACCESS_KEY);
+  //   // if (this.state.file === null) {
+  //   //     console.log('shits empty')
+  //   // } else {
+  //   //     console.log(this.state.file)
+  //   // }
   // }
-  handleFileUpload(event) {
-    this.setState({ value: event.target.value });
-    this.setState({ file: event.target.files[0] })
-    // this.state.file = event.target.files[0];
-    console.log(event.target.files[0]);
-  }
+
   render() {
     return (
       <>
@@ -84,11 +117,32 @@ class UploadModal extends Component {
           </Modal.Header>
           <Modal.Body>
             <p>Add other stuff</p>
-            <input type='file' onChange={this.handleFileUpload} />
+            <input type='file' onChange={this.handleFileChange} />
+            <div className="file-name-div">
+              <p>File name: </p>
+              <input type='text' onChange={this.handleTextChange}/>
+            </div>
+
+            {/* Stuff for testing api calls */}
+
+            {/* <p>{this.state.response}</p>
+            <form onSubmit={this.handleApiPost}>
+              <p>
+                <strong>Post to Server:</strong>
+              </p>
+              <input
+                type="text"
+                value={this.state.post}
+                onChange={e => this.setState({ post: e.target.value })}
+              />
+              <button type="submit">Submit</button>
+            </form>
+            <p>{this.state.responseToPost}</p> */}
           </Modal.Body>
           <Modal.Footer>
             {/* for now it just closes the modal */}
-            <Button onClick={this.uploadIT}>Save Changes</Button>
+            <Button onClick={this.handleFileUpload}>Save Changes</Button>
+            {/* <Button onClick={this.checkEmpty}>Check</Button> */}
           </Modal.Footer>
         </Modal>
         <Button variant="primary" onClick={this.showModal}>

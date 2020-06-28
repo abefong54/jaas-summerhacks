@@ -10,4 +10,13 @@ router.get("/dashboard", function(req, res, next) {
     res.send(response);
 });
 
+// testing api post request
+// router.post("/dashboardPost", function(req, res){
+//     console.log(req.body);
+//     res.send(
+//         `post received:  ${req.body.post}`
+//     )
+// });
+
+
 module.exports = router;
