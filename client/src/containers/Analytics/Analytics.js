@@ -59,6 +59,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+import OverallStatsGraph from '../../components/OverallStatsGraph/OverallStatsGraph';
+
 
 
 import { Component } from 'react'
@@ -80,30 +82,36 @@ export default function CenteredGrid() {
 
   return (
     <div style={{padding: '2% 2%'}, {margin: '5% 2% 2% 2%'}}>
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={4}>
-        <div style={{ maxWidth: '100%'}}>
-        <MaterialTable
-          columns={[
-            { title: 'Class Section', field: 'name' }
-          ]}
-          data={[{ name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 }]}
-          title="Notes"
-        />
+      <div className={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={4}>
+            <div style={{ maxWidth: '100%'}}>
+              <MaterialTable
+                columns={[
+                  { title: 'Class Section', field: 'name' },
+                  { title: 'Note', field: 'name' },
+                  { title: 'Class Section', field: 'name' }
+
+                ]}
+                data={[{ name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 }]}
+                title="Notes"
+              />
+            </div>
+          </Grid>
+          <Grid item xs={8}>
+            <Paper className={classes.paper}>SHUBHA CODE HERE</Paper>
+          </Grid>
+          <Grid item xs={4}>
+            <Paper className={classes.paper}>
+              ALMAS CODE HERE
+  {/*             <OverallStatsGraph/> */}
+              </Paper>
+          </Grid>
+          <Grid item xs={8}>
+            <Paper className={classes.paper}>GRAPH</Paper>
+          </Grid>
+        </Grid>
       </div>
-        </Grid>
-        <Grid item xs={8}>
-          <Paper className={classes.paper}>VIDEO</Paper>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>STATS</Paper>
-        </Grid>
-        <Grid item xs={8}>
-          <Paper className={classes.paper}>GRAPH</Paper>
-        </Grid>
-      </Grid>
-    </div>
     </div>
   );
 }
