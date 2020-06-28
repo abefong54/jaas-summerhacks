@@ -26,12 +26,14 @@ async function getClasslistSet()  {
 
       // CONNECT TO TABLE
       var result = await dynamoDocumentClient.scan(params).promise()
-      var classSet = new Set()
-      var emotions = {};
+      var classSet = {}
+    //   var emotions = {};
 
       // CREATE RETURN OBJECT
       result.Items.forEach(function(itemdata) {
-          classSet.add(itemdata["class_name"]);
+        //   classSet.add(itemdata["class_name"]);
+        // console.log(itemdata['id']);
+          classSet[itemdata['id']] = itemdata['class_name'];
       })
 
       return classSet;
@@ -43,48 +45,64 @@ async function getClasslistSet()  {
 }
 
 
-// TODO - RETURN PROPERLY
-async function getVideoListByClassName(className){
-  try {
-      var params = {
-          KeyConditionExpression: 'class_name = :class_name',
-          ExpressionAttributeValues: {
-              ':class_name': className
-          },
-          TableName: "video"
-      };
-      var result = await dynamoDocumentClient.query(params).promise()
-      console.log(JSON.stringify(result))
-  } catch (error) {
-      console.error(error);
-  }
-}
+// // TODO - RETURN PROPERLY
+// async function getVideoListByClassName(className){
+//   try {
+//       var params = {
+//           KeyConditionExpression: 'class_name = :class_name',
+//           ExpressionAttributeValues: {
+//               ':class_name': className
+//               ':class_name': className
+//           },
+//           TableName: "video"
+//       };
+//       var result = await dynamoDocumentClient.query(params).promise()
+//       console.log(JSON.stringify(result))
+//   } catch (error) {
+//       console.error(error);
+//   }
+// }
 
 
 
 // GET CLASS LISTS FOR DROPDOWN
 router.get("/dashboard/dropdown", async function(req, res, next) {
-    var response = [];
+    var response = {};
     //GETTING CLASS NAMES FROM ON SCAN FN TO GET FN
-    var dbResponse = await getClasslistSet();
-    dbResponse.forEach(function(val) {
-        response.push(val);
-    });
+    response = await getClasslistSet();
+    // dbResponse.forEach(function(val) {
+    //     response.push(val);
+    // });
     res.send(response);
 });
 
 // GET VIDEO LIST FOR TABLE
-router.get("/dashboard/table:className", async function(req, res, next) {
-    var response = [];
-    //GETTING CLASS NAMES FROM ON SCAN FN TO GET FN
-    var classname = req.body;
+router.get("/dashboard/class-videos", async function(req, res, next) {
+    var requested_classID = req.query.classid; 
+    var requested_className = req.query.classname; 
 
-    //  update get video list data to only get videos for class name in request
-    var dbResponse = await getVideoListData(classname);
-    // dbResponse.forEach(function(val) {
-    //     response.push(val);
-    // });
-    res.send(dbResponse);
+    console.log('Heres the class id: ' + requested_classID);
+    console.log('Heres the class name: ' + requested_className);
+
+    // move this to another function later
+    var params = {
+        TableName: "video",
+        Key:{
+            "id": { "N": requested_classID },
+            "class_name": { "S": requested_className }
+        }
+    };
+
+    dynamoDocumentClient.get(params, function(err, data) {
+        if (err) {
+            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
+        }
+    });
+
+    var response = ["Cool"];
+    res.send(response);
 });
 
 
