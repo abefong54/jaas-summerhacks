@@ -1,6 +1,6 @@
 
 import React from 'react';
-import CanvasJSReact from '/Users/almasfiza/Desktop/jaas-summerhacks/src/canvas/canvasjs.react.js';
+import CanvasJSReact from '../../canvas/canvasjs.react';
 //var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -16,8 +16,9 @@ class OverallStatsGraph extends React.Component{
         const options = {
         backgroundColor: "black",
         height:200,
-        width:1500,
+        width:900,
         border:2,
+        
           title: {
             text: "Overall stats",
             fontColor:"#87cefa",
@@ -52,7 +53,7 @@ class OverallStatsGraph extends React.Component{
        }
             
        return (
-          <div  className="overall">
+          <div  className="overall" >
             <CanvasJSChart options = {options}
                 /* onRef = {ref => this.chart = ref} */
             />

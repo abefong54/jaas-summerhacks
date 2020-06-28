@@ -1,0 +1,10 @@
+.footer_body{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    border: 1px solid lightskyblue;
+    background-color: black;
+    color: lightskyblue;
+    text-align: center;
+    font-weight: bold;
+
+}
