@@ -16,8 +16,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use('/s3/sign', require('react-s3-uploader/s3router')({
-  accessKeyId: 'AKIA3ENAIKTK2KB2V5HQ', // optional you can set set your AWS_ACCESS_KEY_ID by ENV
-  secretAccessKey: 'ZPLFj9JDBXf+WQX6Ya9sRGanHur0VHQLW4JviS/E', // optional you can set your AWS_SECRET_ACCESS_KEY by ENV
+  accessKeyId: '', // optional you can set set your AWS_ACCESS_KEY_ID by ENV
+  secretAccessKey: '', // optional you can set your AWS_SECRET_ACCESS_KEY by ENV
   bucket: "s3-bucket-v2",
   signatureVersion: 'v2',
   ACL: 'private', // this is default

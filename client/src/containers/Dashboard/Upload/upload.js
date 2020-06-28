@@ -6,6 +6,7 @@ import S3 from 'react-aws-s3';
 import ReactS3Uploader from 'react-s3-uploader-multipart'
 import { uploadFile } from 'react-s3'
 import './upload.css'
+import swal from 'sweetalert'
 import config from '../../../config.json'
 
 class UploadModal extends Component {
@@ -60,10 +61,10 @@ class UploadModal extends Component {
   // }
 
   showModal = () => {
-    this.setState({ modalShow: true })
+    this.setState({ modalShow: true });
   }
   hideModal = () => {
-    this.setState({ modalShow: false })
+    this.setState({ modalShow: false });
   }
 
   handleFileChange = (event) => {
@@ -77,7 +78,8 @@ class UploadModal extends Component {
   }
 
   uponSuccessfulUpload = data => {
-    console.log(data);
+    swal("File Uploaded", "", "success");
+    this.setState({modalShow: false});
   }
 
   handleFileUpload = () => {
