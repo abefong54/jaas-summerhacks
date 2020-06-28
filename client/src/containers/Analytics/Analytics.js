@@ -1,8 +1,11 @@
-import React from 'react';
+/* import React from 'react';
 import OverallStatsGraph from '../../components/OverallStatsGraph/OverallStatsGraph';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import RealTimeStats from '../../components/RealTimeStats/RealTimeStats';
 import PlayVid from '../../components/PlayVid/PlayVid';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
 const useStyles = makeStyles({
     root: {
         marginTop: '50px',
@@ -50,4 +53,59 @@ export default function Analytics(){
         
     )
 
+} */
+ 
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+
+
+import { Component } from 'react'
+import MaterialTable from 'material-table'
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(25),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+}));
+
+export default function CenteredGrid() {
+  const classes = useStyles();
+
+  return (
+    <div style={{padding: '2% 2%'}, {margin: '5% 2% 2% 2%'}}>
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs={4}>
+        <div style={{ maxWidth: '100%'}}>
+        <MaterialTable
+          columns={[
+            { title: 'Class Section', field: 'name' }
+          ]}
+          data={[{ name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 }]}
+          title="Notes"
+        />
+      </div>
+        </Grid>
+        <Grid item xs={8}>
+          <Paper className={classes.paper}>VIDEO</Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>STATS</Paper>
+        </Grid>
+        <Grid item xs={8}>
+          <Paper className={classes.paper}>GRAPH</Paper>
+        </Grid>
+      </Grid>
+    </div>
+    </div>
+  );
 }
+
+
