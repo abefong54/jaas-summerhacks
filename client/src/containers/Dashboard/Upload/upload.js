@@ -7,7 +7,6 @@ import ReactS3Uploader from 'react-s3-uploader-multipart'
 import { uploadFile } from 'react-s3'
 import './upload.css'
 
-
 class UploadModal extends Component {
   constructor(props) {
     super(props);
