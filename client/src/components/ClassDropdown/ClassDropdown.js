@@ -67,7 +67,7 @@ export default function ClassDropdown() {
       });
   }, []);
 
-  function sayHello(id, name) {
+  function getVideoList(id, name) {
       fetch(`http://localhost:9000/resources/dashboard/class-videos?classid=${id}&classname=${name}`)
       .then(results => results.json())
       .then(data => {
@@ -85,7 +85,7 @@ export default function ClassDropdown() {
       </Button>
       <Menu color='black' id="simple-menu" anchorEl={anchorEl} getContentAnchorEl={null} anchorOrigin={{ vertical: "bottom", horizontal: "center" }} transformOrigin={{ vertical: "top", horizontal: "center" }}keepMounted open={Boolean(anchorEl)} onClose={handleClose} drop={'right'}>
           {keyList.map((classID, index) =>
-            <MenuItem color='black' key={classID} value={classID} onClick={() => sayHello(classID, classList[classID])}>{classList[classID]}</MenuItem>
+            <MenuItem color='black' key={classID} value={classID} onClick={() => getVideoList(classID, classList[classID])}>{classList[classID]}</MenuItem>
           )}
       </Menu>
     </div>
