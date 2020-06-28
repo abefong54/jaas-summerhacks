@@ -31,10 +31,10 @@ export default function Header() {
       <AppBar style={{ background: 'black' }} position="fixed">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+            {/* <MenuIcon /> */}
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Welcome
+              Lecture Insight Platform
           </Typography>
           <Button className={classes.menuButton} >Settings</Button>
           <Link to="/" className={classes.menuButton} >SIGN OUT</Link>
