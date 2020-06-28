@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuLink from '@material-ui/core/MenuItem';
+import { keys } from "@material-ui/core/styles/createBreakpoints";
 
 const useStyles = makeStyles({
     root: {
@@ -25,7 +26,11 @@ export default function ClassDropdown() {
   const stylings=useStyles();
   const [page] = React.useState(1);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [classList, setClassList] = React.useState([]);
+
+  const [classList, setClassList] = React.useState({});
+  const [keyList, setKeysList] = React.useState([]);
+
+
   const [videoList, setVideoList] = React.useState([]);
 
 
@@ -53,29 +58,34 @@ export default function ClassDropdown() {
     fetch('http://localhost:9000/resources/dashboard/dropdown')
       .then(results => results.json())
       .then(data => {
+        var keys = [];
+        Object.keys(data).forEach(function(key) {
+            keys.push(key);
+        });
         setClassList(data);
+        setKeysList(keys);
       });
   }, []);
 
-  function sayHello(name) {
-      fetch(`http://localhost:9000/resources/dashboard/class-videos?classname=${name}`)
-      // .then(results => results.json())
-      .then(results => {
-        setVideoList(results);
+  function sayHello(id, name) {
+      fetch(`http://localhost:9000/resources/dashboard/class-videos?classid=${id}&classname=${name}`)
+      .then(results => results.json())
+      .then(data => {
+        console.log(data);
+        setVideoList(data);
       });
-      console.log("Hello " + name);
+      console.log("Class: " + name  + " id: " + id);
       console.log("videolist " , videoList);
     }
-    console.log("videlist ", videoList);
-  
-  return (
+
+    return (
     <div>
       <Button className={stylings.root} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
         CLASSES
       </Button>
       <Menu color='black' id="simple-menu" anchorEl={anchorEl} getContentAnchorEl={null} anchorOrigin={{ vertical: "bottom", horizontal: "center" }} transformOrigin={{ vertical: "top", horizontal: "center" }}keepMounted open={Boolean(anchorEl)} onClose={handleClose} drop={'right'}>
-          {classList.map((className, index) =>
-            <MenuItem color='black'  key={index} value={className} onClick={() => sayHello(className)}>{className}</MenuItem>
+          {keyList.map((classID, index) =>
+            <MenuItem color='black' key={classID} value={classID} onClick={() => sayHello(classID, classList[classID])}>{classList[classID]}</MenuItem>
           )}
       </Menu>
     </div>
