@@ -17,33 +17,33 @@ const useStyles = makeStyles({
   },
   
 });
+var class_name="BIO";
+var lecture_day="12-12-2020";
+var lecture_name="The Nervous System";
 
 //FIGURE THIS OUT LATER
-function createData(name, day , prof) {
-  return { name, day, prof};
+function createData(cname, day , lname) {
+  return { cname, day,lname};
 }
 
 const rows = [
     //SAMPLE DATA
-    createData('Bio 1203','Tuesday','Mr.Peterson')
-  /* createData('Frozen yoghurt', 159, 6.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9), */
+    createData(class_name,lecture_day,lecture_name)
+  
 ];
 
 export default function ClassTable() {
   const classes = useStyles();
+  
 
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell width="200" >Lecture Name</TableCell>
-            <TableCell width="200" align="left">Day</TableCell>
-            <TableCell width="200" align="left">Teacher</TableCell>
+            <TableCell width="200" >Class Name</TableCell>
+            <TableCell width="200" align="left">Lecture Day</TableCell>
+            <TableCell width="200" align="left">Lecture Name</TableCell>
          
           </TableRow>
         </TableHead>
@@ -51,10 +51,10 @@ export default function ClassTable() {
           {rows.map((row) => (
             <TableRow key={row.name}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.cname}
               </TableCell>
               <TableCell align="left">{row.day}</TableCell>
-              <TableCell align="left">{row.prof}</TableCell>
+              <TableCell align="left">{row.lname}</TableCell>
          
             </TableRow>
           ))}
