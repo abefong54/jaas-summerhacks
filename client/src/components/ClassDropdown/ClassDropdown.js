@@ -31,12 +31,8 @@ export default function ClassDropdown() {
   const [keyList, setKeysList] = React.useState([]);
 
 
-  const [videoList, setVideoList] = React.useState([]);
+  const [videoList, setVideoList] = React.useState({});
 
-
-  const [firstName, setFirstName] = React.useState(null);
-  const [lastName, setLastName] = React.useState(null);
-  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -58,24 +54,23 @@ export default function ClassDropdown() {
     fetch('http://localhost:9000/resources/dashboard/dropdown')
       .then(results => results.json())
       .then(data => {
-        var keys = [];
+        var classNames = [];
         Object.keys(data).forEach(function(key) {
-            keys.push(key);
+            classNames.push(key);
         });
         setClassList(data);
-        setKeysList(keys);
+        setKeysList(classNames);
       });
   }, []);
 
-  function getClassVideoList(id, name) {
-      fetch(`http://localhost:9000/resources/dashboard/class-videos?classid=${id}&classname=${name}`)
+  function getClassVideoList(name) {
+      fetch(`http://localhost:9000/resources/dashboard/class-videos?classname=${name}`)
       .then(results => results.json())
       .then(data => {
+        console.log("heres your data");
         console.log(data);
         setVideoList(data);
       });
-      console.log("Class: " + name  + " id: " + id);
-      console.log("videolist " , videoList);
     }
 
     return (
@@ -84,8 +79,8 @@ export default function ClassDropdown() {
         CLASSES
       </Button>
       <Menu color='black' id="simple-menu" anchorEl={anchorEl} getContentAnchorEl={null} anchorOrigin={{ vertical: "bottom", horizontal: "center" }} transformOrigin={{ vertical: "top", horizontal: "center" }}keepMounted open={Boolean(anchorEl)} onClose={handleClose} drop={'right'}>
-          {keyList.map((classID, index) =>
-            <MenuItem color='black' key={classID} value={classID} onClick={() => getClassVideoList(classID, classList[classID])}>{classList[classID]}</MenuItem>
+          {keyList.map((className, index) =>
+            <MenuItem color='black' key={className} value={className} onClick={() => getClassVideoList(className)}>{className}</MenuItem>
           )}
       </Menu>
     </div>
