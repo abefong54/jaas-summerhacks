@@ -6,7 +6,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuLink from '@material-ui/core/MenuItem';
 import { keys } from "@material-ui/core/styles/createBreakpoints";
-
+import useGetClassVideos from '../../hooks/useGetClassVideos/useGetClassVideos';
 const useStyles = makeStyles({
     root: {
       background: 'black',
@@ -30,8 +30,8 @@ export default function ClassDropdown() {
   const [classList, setClassList] = React.useState({});
   const [keyList, setKeysList] = React.useState([]);
 
+  
 
-  const [videoList, setVideoList] = React.useState({});
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -50,6 +50,7 @@ export default function ClassDropdown() {
     }
   });
 
+
   React.useEffect(() => {
     fetch('http://localhost:9000/resources/dashboard/dropdown')
       .then(results => results.json())
@@ -62,16 +63,14 @@ export default function ClassDropdown() {
         setKeysList(classNames);
       });
   }, []);
-
-  function getClassVideoList(name) {
-      fetch(`http://localhost:9000/resources/dashboard/class-videos?classname=${name}`)
-      .then(results => results.json())
-      .then(data => {
-        console.log("heres your data");
-        console.log(data);
-        setVideoList(data);
-      });
+  
+  
+    function testVideoList(className) {
+      const [classVideos] = useGetClassVideos();
     }
+
+
+
 
     return (
     <div>
@@ -80,7 +79,7 @@ export default function ClassDropdown() {
       </Button>
       <Menu color='black' id="simple-menu" anchorEl={anchorEl} getContentAnchorEl={null} anchorOrigin={{ vertical: "bottom", horizontal: "center" }} transformOrigin={{ vertical: "top", horizontal: "center" }}keepMounted open={Boolean(anchorEl)} onClose={handleClose} drop={'right'}>
           {keyList.map((className, index) =>
-            <MenuItem color='black' key={className} value={className} onClick={() => getClassVideoList(className)}>{className}</MenuItem>
+            <MenuItem color='black' key={className} value={className} onClick={() => testVideoList(className)}>{className}</MenuItem>
           )}
       </Menu>
     </div>

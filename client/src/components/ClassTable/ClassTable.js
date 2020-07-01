@@ -23,43 +23,49 @@ var lecture_name="The Nervous System";
 
 //FIGURE THIS OUT LATER
 function createData(cname, day , lname) {
-  return { cname, day,lname};
+  return { };
 }
 
 const rows = [
     //SAMPLE DATA
-    createData(class_name,lecture_day,lecture_name)
+    
   
 ];
 
 export default function ClassTable() {
   const classes = useStyles();
   
-
-  return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell width="200" >Class Name</TableCell>
-            <TableCell width="200" align="left">Lecture Day</TableCell>
-            <TableCell width="200" align="left">Lecture Name</TableCell>
-         
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.cname}
-              </TableCell>
-              <TableCell align="left">{row.day}</TableCell>
-              <TableCell align="left">{row.lname}</TableCell>
-         
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+  if (rows.length==0) {
+    return(
+      <div>Please select a class.</div>
+    )
+  }
+  else {
+    return (
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell width="200" >Class Name</TableCell>
+                <TableCell width="200" align="left">Lecture Day</TableCell>
+                <TableCell width="200" align="left">Lecture Name</TableCell>
+            
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow key={row.name}>
+                  <TableCell component="th" scope="row">
+                    {row.cname}
+                  </TableCell>
+                  <TableCell align="left">{row.day}</TableCell>
+                  <TableCell align="left">{row.lname}</TableCell>
+            
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+    );
+  }
 }

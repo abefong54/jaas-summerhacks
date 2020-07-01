@@ -50,7 +50,7 @@ export default function Dashboard(){
                     </Grid>
                     <Grid item xs={12}>
                         <div style={{paddingLeft:'20px', paddingRight:'20px', paddingBottom:'20px',border:'2px solid lightskyblue',paddingBottom:'300px'}}>
-                            <h1>The Dashboard Body </h1>
+                            
                             {/* CREATE DASHBOARD COMPONENT */}
                             <ClassTable/>
                         </div>
