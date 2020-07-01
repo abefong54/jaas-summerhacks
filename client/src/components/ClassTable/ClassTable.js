@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { AppContext } from '../../containers/Dashboard/Dashboard'
 
 const useStyles = makeStyles({
   table: {
@@ -34,13 +35,27 @@ const rows = [
 
 export default function ClassTable() {
   const classes = useStyles();
+
+
+  const {state, dispatch} = useContext(AppContext);
+  const changeInputValue = (newValue) => {
+
+      dispatch({ type: 'UPDATE_INPUT', data: newValue,});
+  };
   
-  if (rows.length==0) {
+  var count = Object.keys(state.videoClassList).length;
+
+  if (count == 0) {
     return(
-      <div>Please select a class.</div>
+      <div>nothing</div>
     )
   }
   else {
+
+    var classKeys = [];
+    Object.keys(state.videoClassList).forEach(function(key) {
+        classKeys.push(key);
+    });;
     return (
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
@@ -53,14 +68,13 @@ export default function ClassTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.name}>
+              {classKeys.map((key) => (
+                <TableRow key={key}>
                   <TableCell component="th" scope="row">
-                    {row.cname}
+                    {state.videoClassList[key].class_name}
                   </TableCell>
-                  <TableCell align="left">{row.day}</TableCell>
-                  <TableCell align="left">{row.lname}</TableCell>
-            
+                  <TableCell align="left">{state.videoClassList[key].lecture_day}</TableCell>
+                  <TableCell align="left">{state.videoClassList[key].lecture_name}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

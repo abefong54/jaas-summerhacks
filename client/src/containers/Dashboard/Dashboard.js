@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import './Dashboard.css';
 import ClassDropdown from '../../components/ClassDropdown/ClassDropdown';
@@ -22,11 +22,37 @@ const useStyles = makeStyles({
   });
 var testProfessor = 'Apple';
 
+
+// Create context object
+export const AppContext = React.createContext();
+
+// Set up Initial State
+const initialState = {
+
+    videoClassList: [],
+
+};
+
+function reducer(state, action) {
+    switch (action.type) {
+        case 'UPDATE_INPUT':
+            return {
+                videoClassList: action.data
+            };
+
+
+        default:
+            return initialState;
+    }
+}
+
+
 export default function Dashboard(){
     const classes= useStyles();
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     return(
-<div style={{paddingTop:'100px' }}>
+        <div style={{paddingTop:'100px' }}>
                 <Grid container spacing={12}>
                     <Grid item xs={4}>
                         <Paper className={classes.welcomeBanner} elevation={3}>
@@ -35,29 +61,29 @@ export default function Dashboard(){
                     </Grid>
                     <Grid item xs={4}>
                     </Grid>
-                    <Grid item xs={4}>
-                        <Grid container spacing={12}>
-                            <Grid item xs={4}>
-                                <ClassDropdown/>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <Upload />
-                            </Grid>
-                            <Grid item xs={4}>
-                                <Link to="/analytics" ><button>Take me to dashboard</button></Link>
+                    <AppContext.Provider value={{ state, dispatch }}>
+                        <Grid item xs={4}>
+                            <Grid container spacing={12}>
+                                <Grid item xs={4}>
+                                    <ClassDropdown/>
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <Upload />
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <Link to="/analytics" ><button>Take me to dashboard</button></Link>
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <div style={{paddingLeft:'20px', paddingRight:'20px', paddingBottom:'20px',border:'2px solid lightskyblue',paddingBottom:'300px'}}>
-                            
-                            {/* CREATE DASHBOARD COMPONENT */}
-                            <ClassTable/>
-                        </div>
-                    </Grid>
+                        <Grid item xs={12}>
+                            <div style={{paddingLeft:'20px', paddingRight:'20px', paddingBottom:'20px',border:'2px solid lightskyblue',paddingBottom:'300px'}}>
+                                {/* CREATE DASHBOARD COMPONENT */}
+                                <ClassTable/>
+                            </div>
+                        </Grid>
+                    </AppContext.Provider>
                 </Grid>
-            </div>
-
+        </div>  
     )
 }
 

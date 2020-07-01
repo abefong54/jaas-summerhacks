@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AppContext } from '../../containers/Dashboard/Dashboard'
+
 import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
@@ -6,7 +8,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuLink from '@material-ui/core/MenuItem';
 import { keys } from "@material-ui/core/styles/createBreakpoints";
-import useGetClassVideos from '../../hooks/useGetClassVideos/useGetClassVideos';
+
+
 const useStyles = makeStyles({
     root: {
       background: 'black',
@@ -21,7 +24,23 @@ const useStyles = makeStyles({
   });
 
 
+
 export default function ClassDropdown() {
+
+  const {state, dispatch} = useContext(AppContext);
+
+  const changeInputValue = (newValue) => {
+    async function fetchVideos() {
+        const fullResponse = await fetch(`http://localhost:9000/resources/dashboard/class-videos?classname=${newValue}`)
+        const response = await fullResponse.json();
+        console.log("Dispatching" + newValue);
+        console.log("data response");
+        console.log(response);
+        dispatch({ type: 'UPDATE_INPUT', data: response,});
+    }
+    fetchVideos();
+  };
+  
 
   const stylings=useStyles();
   const [page] = React.useState(1);
@@ -29,8 +48,6 @@ export default function ClassDropdown() {
 
   const [classList, setClassList] = React.useState({});
   const [keyList, setKeysList] = React.useState([]);
-
-  
 
 
   const handleClick = (event) => {
@@ -64,14 +81,6 @@ export default function ClassDropdown() {
       });
   }, []);
   
-  
-    function testVideoList(className) {
-      const [classVideos] = useGetClassVideos();
-    }
-
-
-
-
     return (
     <div>
       <Button className={stylings.root} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
@@ -79,7 +88,7 @@ export default function ClassDropdown() {
       </Button>
       <Menu color='black' id="simple-menu" anchorEl={anchorEl} getContentAnchorEl={null} anchorOrigin={{ vertical: "bottom", horizontal: "center" }} transformOrigin={{ vertical: "top", horizontal: "center" }}keepMounted open={Boolean(anchorEl)} onClose={handleClose} drop={'right'}>
           {keyList.map((className, index) =>
-            <MenuItem color='black' key={className} value={className} onClick={() => testVideoList(className)}>{className}</MenuItem>
+            <MenuItem color='black' key={className} value={className} onClick={() => changeInputValue(className)}>{className}</MenuItem>
           )}
       </Menu>
     </div>
