@@ -3,16 +3,22 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Modal } from 'react-bootstrap'
 import S3 from 'react-aws-s3';
-import ReactS3Uploader from 'react-s3-uploader-multipart'
+import { makeStyles } from '@material-ui/core/styles'
+import CicularProgress from '@material-ui/core/CircularProgress'
 import { uploadFile } from 'react-s3'
 import './Upload.css'
 import swal from 'sweetalert'
 import config from '../../config.json'
 
+import CircularIndeterminate from '../ProgressBar/CircularIndeterminate'
+
+const ReactS3Uploader = require('react-s3-uploader');
+
 class UploadModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      progressShow: false,
       response: '',
       post: '',
       responseToPost: '',
@@ -21,7 +27,6 @@ class UploadModal extends Component {
       valueName: '',
       config: {
         bucketName: 's3-bucket-v2',
-        dirName: 'test-send',
         region: 'us-east-2',
         accessKeyId: config.aws_access_key_id,
         secretAccessKey: config.aws_secret_access_key,
@@ -46,19 +51,23 @@ class UploadModal extends Component {
   }
 
   uponSuccessfulUpload = data => {
+    if (data.status === 204) {
+      this.setState({ progressShow: false });
+    }
     swal("File Uploaded", "", "success");
-    this.setState({modalShow: false});
+    console.log(data);
+    this.setState({ modalShow: false });
   }
 
   handleFileUpload = () => {
-
+    this.setState({ progressShow: true });
     console.log("uploading " + this.state.fileName);
 
     const ReactS3Client = new S3(this.state.config);
     ReactS3Client
       .uploadFile(this.state.file, this.state.fileName)
       .then(data => this.uponSuccessfulUpload(data))
-      .catch(err => console.error(err))
+      .catch(err => console.error(err));
   }
 
   render() {
@@ -81,9 +90,9 @@ class UploadModal extends Component {
             <input type='file' onChange={this.handleFileChange} />
             <div className="file-name-div">
               <p>File name: </p>
-              <input type='text' onChange={this.handleTextChange}/>
+              <input type='text' onChange={this.handleTextChange} />
             </div>
-
+            {this.state.progressShow && <CircularIndeterminate />}
           </Modal.Body>
           <Modal.Footer>
             {/* for now it just closes the modal */}
