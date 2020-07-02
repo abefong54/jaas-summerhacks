@@ -16,28 +16,19 @@ const useStyles = makeStyles({
     tableLayout:"auto",
     backgroundColor:'lightskyblue',
     fixedHeader:"false",
+    border:"2px solid white",
+    elevation:"5"
+    
     
   },
-  Link:{
-    color:"white",
-  },
+  header:{
+    backgroundColor:'lightskyblue',
+    color:'white',
+  }
  
   
 });
-var class_name="BIO";
-var lecture_day="12-12-2020";
-var lecture_name="The Nervous System";
 
-//FIGURE THIS OUT LATER
-function createData(cname, day , lname) {
-  return { };
-}
-
-const rows = [
-    //SAMPLE DATA
-    
-  
-];
 
 export default function ClassTable() {
   const classes = useStyles();
@@ -66,10 +57,10 @@ export default function ClassTable() {
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
-              <TableRow>
-                <TableCell width="200" >Class Name</TableCell>
-                <TableCell width="200" align="left">Lecture Day</TableCell>
-                <TableCell width="200" align="left">Lecture Name</TableCell>
+              <TableRow style={{backgroundColor:'black'}}>
+                <TableCell style={{color:'lightskyblue'}}width="200" >CLASS NAME</TableCell>
+                <TableCell style={{color:'lightskyblue'}}width="200" align="left">LECTURE DAY</TableCell>
+                <TableCell style={{color:'lightskyblue'}}width="200" align="left">LECTURE NAME</TableCell>
             
               </TableRow>
             </TableHead>

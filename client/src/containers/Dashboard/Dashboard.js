@@ -19,6 +19,13 @@ const useStyles = makeStyles({
         marginLeft:'2em',
         marginBottom:'2em',
     },
+    dashboardBody:{
+        border:'5px solid lightskyblue',
+        borderRadius: '5px',
+        marginLeft:'40px',
+        marginRight:'40px',
+        paddingBottom:'200px',
+    }
   });
 var testProfessor = 'Apple';
 
@@ -70,13 +77,14 @@ export default function Dashboard(){
                                 <Grid item xs={4}>
                                     <Upload />
                                 </Grid>
-                                <Grid item xs={4}>
+                                {/* <Grid item xs={4}>
                                     <Link to="/analytics" ><button>Take me to dashboard</button></Link>
-                                </Grid>
+                                </Grid> */}
                             </Grid>
                         </Grid>
                         <Grid item xs={12}>
-                            <div style={{paddingLeft:'20px', paddingRight:'20px', paddingBottom:'20px',border:'2px solid lightskyblue',paddingBottom:'300px'}}>
+                           {/*  //style={{paddingLeft:'20px', paddingRight:'20px', paddingBottom:'20px',paddingBottom:'300px', elevation:'3' */}
+                            <div className={classes.dashboardBody}>
                                 {/* CREATE DASHBOARD COMPONENT */}
                                 <ClassTable/>
                             </div>
