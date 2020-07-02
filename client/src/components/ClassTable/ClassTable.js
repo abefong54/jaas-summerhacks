@@ -7,15 +7,21 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { AppContext } from '../../containers/Dashboard/Dashboard'
+import { AppContext } from '../../containers/Dashboard/Dashboard';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   table: {
     //width:"auto", WORKS IN RESPONSIVENESS, SO NOT NEEDED.
     tableLayout:"auto",
     backgroundColor:'lightskyblue',
-    fixedHeader:"false"
+    fixedHeader:"false",
+    
   },
+  Link:{
+    color:"white",
+  },
+ 
   
 });
 var class_name="BIO";
@@ -47,7 +53,7 @@ export default function ClassTable() {
 
   if (count == 0) {
     return(
-      <div>nothing</div>
+      <div>Please select a class to view data.</div>
     )
   }
   else {
@@ -74,7 +80,9 @@ export default function ClassTable() {
                     {state.videoClassList[key].class_name}
                   </TableCell>
                   <TableCell align="left">{state.videoClassList[key].lecture_day}</TableCell>
-                  <TableCell align="left">{state.videoClassList[key].lecture_name}</TableCell>
+                  
+                  <TableCell align="left" ><Link to ="/analytics">{state.videoClassList[key].lecture_name}</Link></TableCell>
+                  
                 </TableRow>
               ))}
             </TableBody>

@@ -39,7 +39,10 @@ body{
   
   
   }
+  a{
+    color:black;
+  }
   a:visited{
-    color:pink;
+    color: brown;
   }
   
