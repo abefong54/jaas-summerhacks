@@ -25,6 +25,7 @@ const useStyles = makeStyles({
         marginLeft:'40px',
         marginRight:'40px',
         paddingBottom:'200px',
+        elevation:'above',
     }
   });
 var testProfessor = 'Apple';
@@ -84,10 +85,10 @@ export default function Dashboard(){
                         </Grid>
                         <Grid item xs={12}>
                            {/*  //style={{paddingLeft:'20px', paddingRight:'20px', paddingBottom:'20px',paddingBottom:'300px', elevation:'3' */}
-                            <div className={classes.dashboardBody}>
+                            <Paper className={classes.dashboardBody}elevation={3}>
                                 {/* CREATE DASHBOARD COMPONENT */}
                                 <ClassTable/>
-                            </div>
+                            </Paper>
                         </Grid>
                     </AppContext.Provider>
                 </Grid>
