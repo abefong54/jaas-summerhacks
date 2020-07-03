@@ -4,19 +4,19 @@ import ClassDropdown from '../../components/ClassDropdown/ClassDropdown';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
-import Upload from './Upload/upload';
-import ClassTable from '../../components/ClassTable/ClassTable';
+import Upload from '../../components/Upload/Upload';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ClassTable from '../../components/ClassTable/ClassTable';
 
 const useStyles = makeStyles({
     root: {
     },
-    welcomeBanner:{
-        border:'5px solid lightskyblue',
+    welcomeBanner: {
+        border: '5px solid lightskyblue',
         borderRadius: '5px',
-        padding:'2em',
-        marginLeft:'2em',
-        marginBottom:'2em',
+        padding: '2em',
+        marginLeft: '2em',
+        marginBottom: '2em',
     },
     dashboardBody:{
         border:'5px solid lightskyblue',
