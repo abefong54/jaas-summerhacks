@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 var AWS = require("aws-sdk");
-var uuid = require('uuid');
 const config = require('../config.json');
 
 const aws_access_key_id =  config.development.aws_access_key_id;
