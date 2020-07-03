@@ -25,6 +25,7 @@ const useStyles = makeStyles({
         marginRight:'40px',
         paddingBottom:'200px',
         elevation:'above',
+        padding:'2em'
     }
   });
 var testProfessor = 'Apple';
