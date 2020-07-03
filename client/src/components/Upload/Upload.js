@@ -86,11 +86,11 @@ class UploadModal extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Add other stuff</p>
+            <p>Upload Lecture Video</p>
             <input type='file' onChange={this.handleFileChange} />
             <div className="file-name-div">
-              <p>File name: </p>
-              <input type='text' onChange={this.handleTextChange} />
+              <p>Enter Lecture Date and Name</p>
+              <input type='text' value="ex: 07-02-2020-BIO-2231" onChange={this.handleTextChange} />
             </div>
             {this.state.progressShow && <CircularIndeterminate />}
           </Modal.Body>
