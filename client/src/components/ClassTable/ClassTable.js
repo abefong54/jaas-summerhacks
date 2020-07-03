@@ -65,7 +65,7 @@ export default function ClassTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {classKeys.map((key) => (
+                {classKeys.map((key) => (
                 <TableRow key={key}>
                   <TableCell component="th" scope="row">
                     {state.videoClassList[key].class_name}

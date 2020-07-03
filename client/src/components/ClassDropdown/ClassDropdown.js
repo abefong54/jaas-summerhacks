@@ -32,9 +32,6 @@ export default function ClassDropdown() {
     async function fetchVideos() {
         const fullResponse = await fetch(`http://localhost:9000/resources/dashboard/class-videos?classname=${newValue}`)
         const response = await fullResponse.json();
-        console.log("Dispatching" + newValue);
-        console.log("data response");
-        console.log(response);
         dispatch({ type: 'UPDATE_INPUT', data: response,});
     }
     fetchVideos();
