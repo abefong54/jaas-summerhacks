@@ -1,6 +1,5 @@
 import React, { useReducer } from 'react';
 import { Link } from 'react-router-dom';
-import './Dashboard.css';
 import ClassDropdown from '../../components/ClassDropdown/ClassDropdown';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
