@@ -81,29 +81,29 @@ class UploadModal extends Component {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Upload a Video
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <p>Add other stuff</p>
-                <input type='file' onChange={this.handleFileChange} />
-                <div className="file-name-div">
-                    <p>File name: </p>
-                    <input type='text' onChange={this.handleTextChange} />
-                </div>
-                {this.state.progressShow && <CircularIndeterminate />}
-            </Modal.Body>
-            <Modal.Footer>
-              
-                <Button id="mybutton" onClick={this.handleFileUpload}>Save Changes</Button>
-               
-            </Modal.Footer>
-            </Modal>
-            <Button id="mybutton" variant="primary" onClick={this.showModal}>
-              UPLOAD
-            </Button>
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
+              Upload a Video
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Upload Lecture Video</p>
+            <input type='file' onChange={this.handleFileChange} />
+            <div className="file-name-div">
+              <p>Enter Lecture Date and Name</p>
+              <input type='text' value="ex: 07-02-2020-BIO-2231" onChange={this.handleTextChange} />
+            </div>
+            {this.state.progressShow && <CircularIndeterminate />}
+          </Modal.Body>
+          <Modal.Footer>
+            {/* for now it just closes the modal */}
+            <Button onClick={this.handleFileUpload}>Save Changes</Button>
+            {/* <Button onClick={this.checkEmpty}>Check</Button> */}
+          </Modal.Footer>
+        </Modal>
+        <Button variant="primary" onClick={this.showModal}>
+          Upload
+        </Button>
       </>
     );
   }
