@@ -3,6 +3,8 @@ import OverallStatsGraph from '../../components/OverallStatsGraph/OverallStatsGr
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import RealTimeStats from '../../components/RealTimeStats/RealTimeStats';
 import PlayVid from '../../components/PlayVid/PlayVid';
+
+
 const useStyles = makeStyles({
     root: {
         marginTop: '50px',
@@ -18,15 +20,8 @@ const useStyles = makeStyles({
         border:"1px solid lightskyblue",
         padding:"100px",
         marginBottom:'10px'
-
     },
-    
-    
-      
-    
-    
-
-  });
+});
 
 export default function Analytics(){
     const style=useStyles();
@@ -37,17 +32,10 @@ export default function Analytics(){
             </div>
             <div className={style.realtime}>
                 <RealTimeStats/>
-
             </div>
             <div className={style.overall}>
-            <OverallStatsGraph/>
-
+                <OverallStatsGraph/>
             </div>
-        
-        
-        
         </div>
-        
     )
-
 }
