@@ -171,7 +171,7 @@ router.get("/analytics/class-analytics", async function(req, res, next) {
     };
     // console.log(req.query.classID);
     data.video = await getClassAnalyticsDataByID(req.query.classID);
-    data.notebook = await getClassNotesByClassID(req.query.classID);
+    // data.notebook = await getClassNotesByClassID(req.query.classID);
 
     console.log("back here:");
     console.log(data);
