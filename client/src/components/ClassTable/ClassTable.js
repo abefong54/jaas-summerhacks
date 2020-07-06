@@ -9,6 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { AppContext } from '../../containers/Dashboard/Dashboard';
 import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
+
 
 const useStyles = makeStyles({
   table: {
@@ -25,57 +27,68 @@ const useStyles = makeStyles({
     backgroundColor:'lightskyblue',
     color:'white',
   }
- 
-  
 });
 
 
 export default function ClassTable() {
   const classes = useStyles();
-
-
   const {state, dispatch} = useContext(AppContext);
-  const changeInputValue = (newValue) => {
 
+  const changeInputValue = (newValue) => {
       dispatch({ type: 'UPDATE_INPUT', data: newValue,});
   };
   
   var count = Object.keys(state.videoClassList).length;
 
   if (count == 0) {
-    return(
-      <div>Please select a class to view data.</div>
-    )
-  }
-  else {
 
-    var classKeys = [];
+    return(
+      <div>
+          Please select a class to view data.
+      </div>
+    )
+
+  } else {
+
+    var videos = [];
     Object.keys(state.videoClassList).forEach(function(key) {
-        classKeys.push(key);
-    });;
+        videos.push(key);
+    });
+
+    function testInput(value ) {
+        console.log("this works: " +  value);
+    }
+
     return (
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow style={{backgroundColor:'black'}}>
+                <TableCell style={{color:'lightskyblue'}}width="200" align="left">LECTURE NAME</TableCell>
                 <TableCell style={{color:'lightskyblue'}}width="200" >CLASS NAME</TableCell>
                 <TableCell style={{color:'lightskyblue'}}width="200" align="left">LECTURE DAY</TableCell>
-                <TableCell style={{color:'lightskyblue'}}width="200" align="left">LECTURE NAME</TableCell>
-            
               </TableRow>
             </TableHead>
             <TableBody>
-                {classKeys.map((key) => (
-                <TableRow key={key}>
-                  <TableCell component="th" scope="row">
-                    {state.videoClassList[key].class_name}
-                  </TableCell>
-                  <TableCell align="left">{state.videoClassList[key].lecture_day}</TableCell>
-                  
-                  <TableCell align="left" ><Link to ="/analytics">{state.videoClassList[key].lecture_name}</Link></TableCell>
-                  
-                </TableRow>
-              ))}
+                {videos.map((key) => (
+                  <TableRow key={key}>
+                    {/* VIDEO NAME */}
+                      <TableCell align="left" > 
+                          <Link to={"/analytics/"+key} params={{ testvalue: "hello" }} value="hi" onClick={() => testInput(state.videoClassList[key].lecture_name)}> 
+                              {state.videoClassList[key].lecture_name} 
+                          </Link>
+                      </TableCell>
+                      {/* CLASS NAME */}
+                      <TableCell component="th" scope="row">
+                        {state.videoClassList[key].class_name}
+                      </TableCell>
+                      {/* CLASS DATE */}
+                      <TableCell align="left">
+                          {state.videoClassList[key].lecture_day}
+                      </TableCell>
+                  </TableRow>
+                )
+              )}
             </TableBody>
           </Table>
         </TableContainer>
