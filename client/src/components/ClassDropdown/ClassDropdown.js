@@ -72,7 +72,7 @@ export default function ClassDropdown() {
         Object.keys(data).forEach(function(key) {
             classNames.push(key);
         });
-        setClassList(data);
+      setClassList(data);
         setKeysList(classNames);
       });
   }, []);

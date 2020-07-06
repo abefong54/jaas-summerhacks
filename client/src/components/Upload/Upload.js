@@ -74,7 +74,6 @@ class UploadModal extends Component {
     return (
       <>
         <Modal
-            
             show={this.state.modalShow}
             onHide={this.hideModal}
             size="lg"

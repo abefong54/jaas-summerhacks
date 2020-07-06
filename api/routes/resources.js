@@ -40,7 +40,7 @@ async function getClasslist()  {
   }
 }
 
-// Use the query operation to get a class by it's id
+// Use the query operation to get a class by its name
 async function getClassByName(className){
   try {
       // DEFINE TABLE FOR QUERY 
@@ -71,7 +71,82 @@ async function getClassByName(className){
   }
 }
 
+// Use the query operation to get a class by its id
+async function getClassAnalyticsDataByID(classID) {
+  try {
+      // DEFINE TABLE FOR QUERY 
+      console.log("Querying for classes for class id #" +classID);
 
+      // SET UP DYNAMO DB QUERY
+      var params = {
+          TableName : "video",
+          KeyConditionExpression: "#id = :id",
+          ExpressionAttributeNames: {
+            "#id":"id",
+          },
+          ExpressionAttributeValues: {
+            ":id":  {
+              N: classID
+            }
+          }
+      };
+
+      // CONNECT TO DB
+      var classData = await dynamodb.query(params, function(err, data) {
+          if (err) {
+              console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+              return [];
+          } else {
+              return data.Items[0];
+          }
+      }).promise();
+
+      return classData.Items[0];
+
+  } catch (error) {
+      console.error(error);
+      return error;
+  }
+}
+
+
+// Use the query operation to get a notes by class id
+async function getClassNotesByClassID(classID) {
+  try {
+      // DEFINE TABLE FOR QUERY 
+      console.log("Querying for notes for class id #" +classID);
+
+      // SET UP DYNAMO DB QUERY
+      var params = {
+          TableName : "notes",
+          KeyConditionExpression: "#class_id = :class_id",
+          ExpressionAttributeNames: {
+            "#class_id":"class_id",
+          },
+          ExpressionAttributeValues: {
+            ":class_id":  {
+              N: classID
+            }
+          }
+      };
+
+      // CONNECT TO DB
+      var notesData = await dynamodb.query(params, function(err, data) {
+          if (err) {
+              console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+              return [];
+          } else {
+              return data.Items[0];
+          }
+      }).promise();
+
+      return notesData.Items[0];
+
+  } catch (error) {
+      console.error(error);
+      return error;
+  }
+}
 
 // GET CLASS LISTS FOR DROPDOWN
 router.get("/dashboard/dropdown", async function(req, res, next) {
@@ -82,6 +157,24 @@ router.get("/dashboard/dropdown", async function(req, res, next) {
 // GET VIDEO LIST FOR TABLE
 router.get("/dashboard/class-videos", async function(req, res, next) {
     var data = await getClassByName(req.query.classname);
+    res.send(data);
+});
+
+
+// GET VIDEO ANALYTICS DATA
+// /dashboard/analytics/${props.match.params.classID}
+router.get("/analytics/class-analytics", async function(req, res, next) {
+
+    var data = {
+        "video": {},
+        "notebook": []
+    };
+    // console.log(req.query.classID);
+    data.video = await getClassAnalyticsDataByID(req.query.classID);
+    // data.notebook = await getClassNotesByClassID(req.query.classID);
+
+    console.log("back here:");
+    console.log(data);
     res.send(data);
 });
 
