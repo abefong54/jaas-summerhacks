@@ -3,12 +3,12 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Modal } from 'react-bootstrap'
 import S3 from 'react-aws-s3';
-import { makeStyles } from '@material-ui/core/styles'
-import CicularProgress from '@material-ui/core/CircularProgress'
-import { uploadFile } from 'react-s3'
-import './Upload.css'
-import swal from 'sweetalert'
-import config from '../../config.json'
+import { makeStyles } from '@material-ui/core/styles';
+import CicularProgress from '@material-ui/core/CircularProgress';
+import { uploadFile } from 'react-s3';
+import './Upload.css';
+import swal from 'sweetalert';
+import config from '../../config.json';
 
 import CircularIndeterminate from '../ProgressBar/CircularIndeterminate'
 
@@ -74,11 +74,12 @@ class UploadModal extends Component {
     return (
       <>
         <Modal
-          show={this.state.modalShow}
-          onHide={this.hideModal}
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
+            
+            show={this.state.modalShow}
+            onHide={this.hideModal}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
