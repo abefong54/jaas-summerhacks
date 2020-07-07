@@ -5,51 +5,18 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default function OverallStatsGraph({classAnalytics}){
-  console.log("INSIDE OVERAALLSTATSGRAPH.js")
+    console.log("INSIDE OVERAALLSTATSGRAPH.js")
 
-  //CHECKING THE PROPS PASSED INTO THIS COMPONENT
-  console.log(classAnalytics)
-  console.log(classAnalytics.sad_sum)
-  
-  // console.log("ANGRY")
-  // //STORING THE VALUES OF THE classAnalytics props passed IN ARRAY FORMAT CHANGES THE ORDER OF THE KEYS
-  // const arr=Object.values(classAnalytics)
-  // console.log(arr)
-  // //TRYING TO FIND A WAY TO GET THE VALUE OF THIS OBJECT ARR[6] METHOD 1
-  // console.log(arr[6])
-  // //TRYING ANOTHER WAY  METHOD 2- MAPPING THE OBJECT TO ARRAY BUT STILL HAVE THE NUMERIC VALUE IN OBJECT FORM INSIDE
-  // function convertObjectToList(obj) {
-  //   return Object.keys(obj).map(function(key){
-  //     let currElement = [key, obj[key]];
-  //     return currElement
-  //   });
-  //  }
-   
-  //  var res = convertObjectToList(classAnalytics);
-  //  console.log("RES AFTER MAPPING")
-  //  console.log(res)
-   
-  
-  
-  //TO CHECK THE DATA TYPE
-  // console.log(typeof(classAnalytics.lecture_name) )
- 
-  
- 
-  
-  
-  
-
-  //TRY TO CONVERT THE OBJECT TO A NUMBER
-  /* console.log(JSON.stringify(emo[0].S)) */
-  
-  /* console.log({classAnalytics["angry_sum"]}) */
-  
+    //CHECKING THE PROPS PASSED INTO THIS COMPONENT
+    console.log(classAnalytics)
+    console.log(classAnalytics.sad_sum)
+    console.log(typeof(classAnalytics.sad_sum))
+    
+    
     const options = {
     backgroundColor: "black",
-    height:200,
-    width:900,
-    border:2,
+    height:400,
+    width:450,
     
       title: {
         text: "Overall stats",
@@ -61,7 +28,7 @@ export default function OverallStatsGraph({classAnalytics}){
       },
       axisY2:{
         title: "Scale",
-        labelFontColor: "#87cefa",
+        labelFontColor: "white",
       },
       data: [{
           type: "bar",
@@ -69,15 +36,14 @@ export default function OverallStatsGraph({classAnalytics}){
           color: "#87cefa",
                 
           dataPoints: [
-              { y: 100, label: "Fear" },
-              { y: 100, label: "Unknown" },
-              { y: 100, label: "Calm" },
-              { y: 100, label: "Surprise" },
-              { y: 100, label: "Disgusted" },
-              { y: 140, label: "Confused" },
-              { y: 100, label: "Angry" },
-              { y: 50, label: "Sad" },
-              { y: 120, label: "Happy"  },
+              { y: parseInt(classAnalytics.unknown_sum), label: "Unknown" },
+              { y: parseInt(classAnalytics.fear_sum), label: "Fear" },
+              { y: parseInt(classAnalytics.calm_sum), label: "Calm" },
+              { y: parseInt(classAnalytics.surprised_sum), label: "Surprise" },
+              { y: parseInt(classAnalytics.disgusted_sum), label: "Disgusted" },
+              { y: parseInt(classAnalytics.angry_sum), label: "Angry" },
+              { y: parseInt(classAnalytics.sad_sum), label: "Sad" },
+              { y: parseInt(classAnalytics.happy_sum), label: "Happy"  },
            ]
        }],
       }
