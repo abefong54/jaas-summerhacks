@@ -101,7 +101,7 @@ async function getClassAnalyticsDataByID(classID) {
           }
       }).promise();
 
-      return classData.Items[0];
+      return AWS.DynamoDB.Converter.unmarshall(classData.Items[0]);
 
   } catch (error) {
       console.error(error);

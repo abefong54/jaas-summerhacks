@@ -6,31 +6,33 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default function OverallStatsGraph({classAnalytics}){
   console.log("INSIDE OVERAALLSTATSGRAPH.js")
+
   //CHECKING THE PROPS PASSED INTO THIS COMPONENT
-  console.log({classAnalytics})
+  console.log(classAnalytics)
+  console.log(classAnalytics.sad_sum)
   
-  console.log("ANGRY")
-  //STORING THE VALUES OF THE classAnalytics props passed IN ARRAY FORMAT CHANGES THE ORDER OF THE KEYS
-  const arr=Object.values(classAnalytics)
-  console.log(arr)
-  //TRYING TO FIND A WAY TO GET THE VALUE OF THIS OBJECT ARR[6] METHOD 1
-  console.log(arr[6])
-  //TRYING ANOTHER WAY  METHOD 2- MAPPING THE OBJECT TO ARRAY BUT STILL HAVE THE NUMERIC VALUE IN OBJECT FORM INSIDE
-  function convertObjectToList(obj) {
-    return Object.keys(obj).map(function(key){
-      let currElement = [key, obj[key]];
-      return currElement
-    });
-   }
+  // console.log("ANGRY")
+  // //STORING THE VALUES OF THE classAnalytics props passed IN ARRAY FORMAT CHANGES THE ORDER OF THE KEYS
+  // const arr=Object.values(classAnalytics)
+  // console.log(arr)
+  // //TRYING TO FIND A WAY TO GET THE VALUE OF THIS OBJECT ARR[6] METHOD 1
+  // console.log(arr[6])
+  // //TRYING ANOTHER WAY  METHOD 2- MAPPING THE OBJECT TO ARRAY BUT STILL HAVE THE NUMERIC VALUE IN OBJECT FORM INSIDE
+  // function convertObjectToList(obj) {
+  //   return Object.keys(obj).map(function(key){
+  //     let currElement = [key, obj[key]];
+  //     return currElement
+  //   });
+  //  }
    
-   var res = convertObjectToList(classAnalytics);
-   console.log("RES AFTER MAPPING")
-   console.log(res)
+  //  var res = convertObjectToList(classAnalytics);
+  //  console.log("RES AFTER MAPPING")
+  //  console.log(res)
    
   
   
   //TO CHECK THE DATA TYPE
-  console.log(typeof(classAnalytics.lecture_name) )
+  // console.log(typeof(classAnalytics.lecture_name) )
  
   
  
