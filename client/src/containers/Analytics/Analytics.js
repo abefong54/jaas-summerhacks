@@ -38,6 +38,8 @@ export default function Analytics(props){
           .then(data => {
             console.log("in client:");
             console.log(data);
+            
+            //console.log(data.video.angry_sum["S"])
             setVideoAnalyticsData(data.video);
             setNotebookData(data.notebook);
           });
@@ -52,7 +54,7 @@ export default function Analytics(props){
                 <RealTimeStats/>
             </div>
             <div className={style.overall}>
-                <OverallStatsGraph/>
+                <OverallStatsGraph classAnalytics={classAnalytics}/>
             </div>
         </div>
     )

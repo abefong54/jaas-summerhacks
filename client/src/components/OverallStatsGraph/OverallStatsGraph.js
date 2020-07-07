@@ -4,7 +4,33 @@ import CanvasJSReact from '../../canvas/canvasjs.react';
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-export default function OverallStatsGraph(){
+export default function OverallStatsGraph({classAnalytics}){
+  console.log("INSIDE OVERAALLSTATSGRAPH.js")
+  //CHECKING THE PROPS PASSED INTO THIS COMPONENT
+  console.log({classAnalytics})
+  
+  console.log("ANGRY")
+  //STORING THE VALUES OF THE classAnalytics props passed IN ARRAY FORMAT CHANGES THE ORDER OF THE KEYS
+  const arr=Object.values(classAnalytics)
+  console.log(arr)
+  //TRYING TO FIND A WAY TO GET THE VALUE OF THIS OBJECT ARR[6]
+  console.log(arr[6])
+  
+  
+  //TO CHECK THE DATA TYPE
+  console.log(typeof(classAnalytics.lecture_name) )
+ 
+  
+ 
+  
+  
+  
+
+  //TRY TO CONVERT THE OBJECT TO A NUMBER
+  /* console.log(JSON.stringify(emo[0].S)) */
+  
+  /* console.log({classAnalytics["angry_sum"]}) */
+  
     const options = {
     backgroundColor: "black",
     height:200,
@@ -35,7 +61,7 @@ export default function OverallStatsGraph(){
               { y: 100, label: "Surprise" },
               { y: 100, label: "Disgusted" },
               { y: 140, label: "Confused" },
-              { y: 40, label: "Angry" },
+              { y: 100, label: "Angry" },
               { y: 50, label: "Sad" },
               { y: 120, label: "Happy"  },
            ]
