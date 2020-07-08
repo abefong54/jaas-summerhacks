@@ -1,4 +1,3 @@
-
 import React from 'react';
 import './Footer.css';
 
@@ -7,10 +6,7 @@ class Footer extends React.Component{
         return(
                 <div className="footer_body">
                     <div className="footertext">
-                        
-                    
-                    Zoom You Analytics
-                        
+                        Zoom You Analytics
                     </div>
                 </div>
         );

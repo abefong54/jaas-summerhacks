@@ -35,11 +35,11 @@ body{
     font-size: 10px;
     color:lightskyblue;
     font-weight: bold;
-  
-  
-  
+  }
+  a{
+    color:black;
   }
   a:visited{
-    color:pink;
+    color: brown;
   }
   

@@ -17,8 +17,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CenteredGrid() {
+export default function Analytics(props) {
   const classes = useStyles();
+
+  const style=useStyles();
+  const [classAnalytics, setVideoAnalyticsData] = React.useState({});
+  const [notebookData, setNotebookData] = React.useState({});
+
+  console.log("Progs:");
+  console.log(props.match.params.classID);
+
+  React.useEffect(() => {
+      fetch(`http://localhost:9000/resources/analytics/class-analytics?classID=${props.match.params.classID}`)
+        .then(results => results.json())
+        .then(data => {
+          console.log("in client:");
+          console.log(data);
+          setVideoAnalyticsData(data.video);
+          setNotebookData(data.notebook);
+        });
+    }, []);
 
   return (
     <div style={{padding: '2% 2%'}, {margin: '5% 2% 2% 2%'}}>

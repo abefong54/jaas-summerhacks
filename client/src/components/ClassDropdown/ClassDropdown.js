@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AppContext } from '../../containers/Dashboard/Dashboard'
 import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
@@ -6,6 +7,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuLink from '@material-ui/core/MenuItem';
 import { keys } from "@material-ui/core/styles/createBreakpoints";
+
 
 const useStyles = makeStyles({
     root: {
@@ -21,7 +23,20 @@ const useStyles = makeStyles({
   });
 
 
+
 export default function ClassDropdown() {
+
+  const {state, dispatch} = useContext(AppContext);
+
+  const changeInputValue = (newValue) => {
+    async function fetchVideos() {
+        const fullResponse = await fetch(`http://localhost:9000/resources/dashboard/class-videos?classname=${newValue}`)
+        const response = await fullResponse.json();
+        dispatch({ type: 'UPDATE_INPUT', data: response,});
+    }
+    fetchVideos();
+  };
+  
 
   const stylings=useStyles();
   const [page] = React.useState(1);
@@ -31,12 +46,6 @@ export default function ClassDropdown() {
   const [keyList, setKeysList] = React.useState([]);
 
 
-  const [videoList, setVideoList] = React.useState([]);
-
-
-  const [firstName, setFirstName] = React.useState(null);
-  const [lastName, setLastName] = React.useState(null);
-  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -54,38 +63,28 @@ export default function ClassDropdown() {
     }
   });
 
+
   React.useEffect(() => {
     fetch('http://localhost:9000/resources/dashboard/dropdown')
       .then(results => results.json())
       .then(data => {
-        var keys = [];
+        var classNames = [];
         Object.keys(data).forEach(function(key) {
-            keys.push(key);
+            classNames.push(key);
         });
-        setClassList(data);
-        setKeysList(keys);
+      setClassList(data);
+        setKeysList(classNames);
       });
   }, []);
-
-  function getVideoList(id, name) {
-      fetch(`http://localhost:9000/resources/dashboard/class-videos?classid=${id}&classname=${name}`)
-      .then(results => results.json())
-      .then(data => {
-        console.log(data);
-        setVideoList(data);
-      });
-      console.log("Class: " + name  + " id: " + id);
-      console.log("videolist " , videoList);
-    }
-
+  
     return (
     <div>
       <Button className={stylings.root} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
         CLASSES
       </Button>
       <Menu color='black' id="simple-menu" anchorEl={anchorEl} getContentAnchorEl={null} anchorOrigin={{ vertical: "bottom", horizontal: "center" }} transformOrigin={{ vertical: "top", horizontal: "center" }}keepMounted open={Boolean(anchorEl)} onClose={handleClose} drop={'right'}>
-          {keyList.map((classID, index) =>
-            <MenuItem color='black' key={classID} value={classID} onClick={() => getVideoList(classID, classList[classID])}>{classList[classID]}</MenuItem>
+          {keyList.map((className, index) =>
+            <MenuItem color='black' key={className} value={className} onClick={() => changeInputValue(className)}>{className}</MenuItem>
           )}
       </Menu>
     </div>
