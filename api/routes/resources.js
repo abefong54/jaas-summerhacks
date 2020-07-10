@@ -86,7 +86,7 @@ async function getClassAnalyticsDataByID(classID) {
           },
           ExpressionAttributeValues: {
             ":id":  {
-              N: classID
+              S: classID
             }
           }
       };
@@ -108,13 +108,6 @@ async function getClassAnalyticsDataByID(classID) {
       return error;
   }
 }
-
-// classes[itemdata['id']] = {
-//   'class_name': itemdata.class_name,
-//   'lecture_name': itemdata.lecture_name,
-//   'lecture_day': itemdata.lecture_day
-// }
-// }
 
 // Use the query operation to get a notes by class id
 async function getClassNotesByClassID(classID) {
@@ -142,10 +135,10 @@ async function getClassNotesByClassID(classID) {
     
     return notes;
 
-} catch (error) {
-    console.error(error);
-    return error;
-}
+  } catch (error) {
+      console.error(error);
+      return error;
+  }
 }
 
 // GET CLASS LISTS FOR DROPDOWN
