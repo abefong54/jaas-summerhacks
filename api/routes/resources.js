@@ -86,7 +86,7 @@ async function getClassAnalyticsDataByID(classID) {
           },
           ExpressionAttributeValues: {
             ":id":  {
-              N: classID
+              S: classID
             }
           }
       };
