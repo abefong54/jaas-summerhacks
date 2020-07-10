@@ -86,7 +86,7 @@ async function getClassAnalyticsDataByID(classID) {
           },
           ExpressionAttributeValues: {
             ":id":  {
-              N: classID
+              S: classID
             }
           }
       };
@@ -125,7 +125,7 @@ async function getClassNotesByClassID(classID) {
           },
           ExpressionAttributeValues: {
             ":class_id":  {
-              N: classID
+              S: classID
             }
           }
       };
