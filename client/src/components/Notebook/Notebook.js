@@ -41,7 +41,8 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
 
-export default function Notebook() {
+export default function Notebook({notebookData}) {
+  console.log("in notebook.js")
   const [state, setState] = React.useState({
     columns: [
       { title: "Note", field: "note" },

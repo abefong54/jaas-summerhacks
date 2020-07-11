@@ -43,7 +43,7 @@ export default function Analytics(props) {
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={4}>
-            <Notebook/>
+            <Notebook notebookData={notebookData}/>
           </Grid>
           <Grid item xs={8}>
             <Paper className={classes.paper}>SHUBHA CODE HERE</Paper>
