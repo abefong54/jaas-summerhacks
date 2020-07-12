@@ -74,9 +74,7 @@ async function getClassByName(className){
 // Use the query operation to get a class by its id
 async function getClassAnalyticsDataByID(classID) {
   try {
-      // DEFINE TABLE FOR QUERY 
-      console.log("Querying for classes for class id #" +classID);
-
+    
       // SET UP DYNAMO DB QUERY
       var params = {
           TableName : "video",
@@ -109,38 +107,29 @@ async function getClassAnalyticsDataByID(classID) {
   }
 }
 
-
 // Use the query operation to get a notes by class id
 async function getClassNotesByClassID(classID) {
   try {
-      // DEFINE TABLE FOR QUERY 
-      console.log("Querying for notes for class id #" +classID);
+    // DEFINE TABLE FOR QUERY 
+    var params = {
+      TableName: "notes"
+    };
 
-      // SET UP DYNAMO DB QUERY
-      var params = {
-          TableName : "notes",
-          KeyConditionExpression: "#class_id = :class_id",
-          ExpressionAttributeNames: {
-            "#class_id":"class_id",
-          },
-          ExpressionAttributeValues: {
-            ":class_id":  {
-              N: classID
+    // CONNECT TO TABLE
+    var result = await dynamoDocumentClient.scan(params).promise()
+    var notes = {}
+
+    // CREATE RETURN OBJECT
+    result.Items.forEach(function(noteFromDB) {
+        if (noteFromDB['class_id'] == classID) { 
+            notes[noteFromDB['id']] = { 
+              'note': noteFromDB.note, 
+              'date': noteFromDB.date, 
             }
-          }
-      };
-
-      // CONNECT TO DB
-      var notesData = await dynamodb.query(params, function(err, data) {
-          if (err) {
-              console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
-              return [];
-          } else {
-              return data.Items[0];
-          }
-      }).promise();
-
-      return notesData.Items[0];
+        }
+    });
+    
+    return notes;
 
   } catch (error) {
       console.error(error);
@@ -164,17 +153,16 @@ router.get("/dashboard/class-videos", async function(req, res, next) {
 // GET VIDEO ANALYTICS DATA
 // /dashboard/analytics/${props.match.params.classID}
 router.get("/analytics/class-analytics", async function(req, res, next) {
-
+  
     var data = {
         "video": {},
         "notebook": []
     };
-    // console.log(req.query.classID);
+    console.log("stuff");
+    console.log(req.query.classID);
     data.video = await getClassAnalyticsDataByID(req.query.classID);
-    // data.notebook = await getClassNotesByClassID(req.query.classID);
+    data.notebook = await getClassNotesByClassID(req.query.classID);
 
-    console.log("back here:");
-    console.log(data);
     res.send(data);
 });
 

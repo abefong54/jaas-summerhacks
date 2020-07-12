@@ -1,61 +1,66 @@
-import React from 'react';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 import OverallStatsGraph from '../../components/OverallStatsGraph/OverallStatsGraph';
-import { makeStyles, withTheme } from '@material-ui/core/styles';
-import RealTimeStats from '../../components/RealTimeStats/RealTimeStats';
-import PlayVid from '../../components/PlayVid/PlayVid';
+import Notebook from '../../components/Notebook/Notebook';
+import { Component } from 'react'
 
-const useStyles = makeStyles({
-    root: {
-        marginTop: '50px',
-        padding:"30px"
-    },
-    vid:{
-        border:"1px solid lightskyblue",
-        padding:"150px"
-    },
-    realtime:{
-        marginTop:'10px',
-        border:"1px solid lightskyblue",
-        padding:"100px",
-        marginBottom:'10px'
-    },
-  });
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(25),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+}));
 
+export default function Analytics(props) {
+  const classes = useStyles();
 
+  const style=useStyles();
+  const [classAnalytics, setVideoAnalyticsData] = React.useState({});
+  const [notebookData, setNotebookData] = React.useState({});
 
+  console.log("Progs:");
+  console.log(props.match.params.classID);
 
-export default function Analytics(props){
-    const style=useStyles();
-    const [classAnalytics, setVideoAnalyticsData] = React.useState({});
-    const [notebookData, setNotebookData] = React.useState({});
+  React.useEffect(() => {
+      fetch(`http://localhost:9000/resources/analytics/class-analytics?classID=${props.match.params.classID}`)
+        .then(results => results.json())
+        .then(data => {
+          console.log("in client:");
+          console.log(data);
+          setVideoAnalyticsData(data.video);
+          setNotebookData(data.notebook);
+        });
+    }, []);
 
-    console.log("Progs:");
-    console.log(props.match.params.classID);
-
-    React.useEffect(() => {
-        fetch(`http://localhost:9000/resources/analytics/class-analytics?classID=${props.match.params.classID}`)
-          .then(results => results.json())
-          .then(data => {
-            console.log("in client:");
-            console.log(data);
-            
-            //console.log(data.video.angry_sum["S"])
-            setVideoAnalyticsData(data.video);
-            setNotebookData(data.notebook);
-          });
-      }, []);
-
-    return(
-        <div className={style.root}>
-            <div className={style.vid}>
-                <PlayVid/>
-            </div>
-            <div className={style.realtime}>
-                <RealTimeStats/>
-            </div>
-            <div className={style.overall}>
-                <OverallStatsGraph classAnalytics={classAnalytics}/>
-            </div>
-        </div>
-    )
+  return (
+    <div style={{padding: '2% 2%'}, {margin: '5% 2% 2% 2%'}}>
+      <div className={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={4}>
+            <Notebook notebookData={notebookData}/>
+          </Grid>
+          <Grid item xs={8}>
+            <Paper className={classes.paper}>SHUBHA CODE HERE</Paper>
+          </Grid>
+          <Grid item xs={4}>
+            <Paper className={classes.paper}>
+              ALMAS CODE HERE
+  {/*             <OverallStatsGraph/> */}
+              </Paper>
+          </Grid>
+          <Grid item xs={8}>
+            <Paper className={classes.paper}>GRAPH</Paper>
+          </Grid>
+        </Grid>
+      </div>
+    </div>
+  );
 }
+
+
