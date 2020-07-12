@@ -74,9 +74,7 @@ async function getClassByName(className){
 // Use the query operation to get a class by its id
 async function getClassAnalyticsDataByID(classID) {
   try {
-      // DEFINE TABLE FOR QUERY 
-      console.log("Querying for classes for class id #" +classID);
-
+    
       // SET UP DYNAMO DB QUERY
       var params = {
           TableName : "video",
@@ -160,12 +158,10 @@ router.get("/analytics/class-analytics", async function(req, res, next) {
         "video": {},
         "notebook": []
     };
-    // console.log(req.query.classID);
+
     data.video = await getClassAnalyticsDataByID(req.query.classID);
     data.notebook = await getClassNotesByClassID(req.query.classID);
 
-    console.log("back here:");
-    console.log(data);
     res.send(data);
 });
 
