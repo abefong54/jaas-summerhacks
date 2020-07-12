@@ -153,12 +153,13 @@ router.get("/dashboard/class-videos", async function(req, res, next) {
 // GET VIDEO ANALYTICS DATA
 // /dashboard/analytics/${props.match.params.classID}
 router.get("/analytics/class-analytics", async function(req, res, next) {
-
+  
     var data = {
         "video": {},
         "notebook": []
     };
-
+    console.log("stuff");
+    console.log(req.query.classID);
     data.video = await getClassAnalyticsDataByID(req.query.classID);
     data.notebook = await getClassNotesByClassID(req.query.classID);
 
