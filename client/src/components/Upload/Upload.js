@@ -74,11 +74,19 @@ class UploadModal extends Component {
     return (
       <>
         <Modal
+<<<<<<< HEAD
           show={this.state.modalShow}
           onHide={this.hideModal}
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered
+=======
+            show={this.state.modalShow}
+            onHide={this.hideModal}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+>>>>>>> master
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">

@@ -28,11 +28,9 @@ class App extends Component {
                 <Grid item xs={12}> 
                     <Route path="/" exact component={Login} />
                     <Route path="/dashboard" component={Dashboard} />
-                    <Route path="/analytics" component={Analytics} />
-                   
+                    <Route path="/analytics/" component={Analytics} />
                 </Grid>
               </Grid>
-
               {/* FOOTER */}
               <Grid item xs={12}>
                   <nav>
@@ -40,8 +38,6 @@ class App extends Component {
                   </nav>
               </Grid>
             </Grid>
-
-
           </div>
 
           

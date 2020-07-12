@@ -61,7 +61,6 @@ export default function ClassTable() {
                 <TableCell style={{color:'lightskyblue'}}width="200" >CLASS NAME</TableCell>
                 <TableCell style={{color:'lightskyblue'}}width="200" align="left">LECTURE DAY</TableCell>
                 <TableCell style={{color:'lightskyblue'}}width="200" align="left">LECTURE NAME</TableCell>
-            
               </TableRow>
             </TableHead>
             <TableBody>

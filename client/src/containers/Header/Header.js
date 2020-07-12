@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,9 +37,10 @@ export default function Header() {
           <Typography variant="h6" className={classes.title}>
               Lecture Insight Platform
           </Typography>
-          <Button className={classes.menuButton} >Settings</Button>
-          <Link to="/" className={classes.menuButton} >SIGN OUT</Link>
-          {/* <Button Link to= "/ "className={classes.menuButton} >Sign Out</Button> */}
+                <Link to="/dashboard" className={classes.menuButton}> DASHBOARD </Link>
+                <Button className={classes.menuButton} >Settings</Button>
+                <Link to="/" className={classes.menuButton} >SIGN OUT</Link>
+            {/* <Button Link to= "/ "className={classes.menuButton} >Sign Out</Button> */}
         </Toolbar>
       </AppBar>
     </div>
