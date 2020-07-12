@@ -129,8 +129,6 @@ async function getClassNotesByClassID(classID) {
               'date': noteFromDB.date, 
             }
         }
-        console.log(noteFromDB);
-      
     });
     
     return notes;

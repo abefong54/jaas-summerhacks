@@ -42,16 +42,18 @@ const tableIcons = {
 };
 
 export default function Notebook({notebookData}) {
-  console.log("in notebook.js")
+
+  var notes = [];
+  Object.keys(notebookData).forEach(function(key) {
+      notes.push(notebookData[key]);
+  });
+
   const [state, setState] = React.useState({
     columns: [
       { title: "Note", field: "note" },
       { title: "Date", field: "date" },
     ],
-    data: [
-      { note: "Send presentation to students", date: "06/20/2020" },
-      { note: "Open second quiz", date: "06/22/2020" },
-    ],
+    data: [],
   });
 
   return (
@@ -59,7 +61,7 @@ export default function Notebook({notebookData}) {
       icons={tableIcons}
       title="Notepad"
       columns={state.columns}
-      data={state.data}
+      data={notes}
       editable={{
         onRowAdd: (newData) =>
           new Promise((resolve) => {
