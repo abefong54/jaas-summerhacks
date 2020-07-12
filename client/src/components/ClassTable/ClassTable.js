@@ -47,27 +47,22 @@ export default function ClassTable() {
   var count = Object.keys(state.videoClassList).length;
 
   if (count == 0) {
-
     return(
       <Grid item xs={12} sm={6} md={4}>
-
-        <Card className={classes.card}>
-            <CardMedia className={classes.cardMedia} image="https://source.unsplash.com/random" title="Image title" />
-
-            <CardContent className={classes.cardContent}>
-              <Typography gutterBottom variant="h5" component="h2">
-                Empty  . . . for now
-              </Typography>
-              <Typography>
-                Select a class to view lecture videos
-              </Typography>
-            </CardContent>
-        </Card>
+          <Card>
+              <CardMedia className={classes.cardMedia} image="https://source.unsplash.com/random" title="Image title" />
+              <CardContent className={classes.cardContent}>
+                <Typography gutterBottom variant="h5" component="h2">
+                  Empty  . . . for now
+                </Typography>
+                <Typography>
+                  Select a class to view lecture videos
+                </Typography>
+              </CardContent>
+          </Card>
         </Grid>
     )
-
   } else {
-
     var videos = [];
     Object.keys(state.videoClassList).forEach(function(key) {
         videos.push(key);
