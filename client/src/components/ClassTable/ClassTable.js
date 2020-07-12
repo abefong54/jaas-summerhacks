@@ -55,9 +55,9 @@ export default function ClassTable() {
         videos.push(key);
     });
 
-    function testInput(value ) {
-        console.log("this works: " +  value);
-    }
+    console.log("stuff you tried");
+    console.log(state.videoClassList);
+
 
     return (
         <TableContainer component={Paper}>
@@ -74,7 +74,7 @@ export default function ClassTable() {
                   <TableRow key={key}>
                     {/* VIDEO NAME */}
                       <TableCell align="left" > 
-                          <Link to={"/analytics/"+key} params={{ testvalue: "hello" }} value="hi" onClick={() => testInput(state.videoClassList[key].lecture_name)}> 
+                          <Link to={"/analytics/"+key}> 
                               {state.videoClassList[key].lecture_name} 
                           </Link>
                       </TableCell>
@@ -85,6 +85,7 @@ export default function ClassTable() {
                       {/* CLASS DATE */}
                       <TableCell align="left">
                           {state.videoClassList[key].lecture_day}
+                          
                       </TableCell>
                   </TableRow>
                 )
