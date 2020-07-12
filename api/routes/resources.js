@@ -40,7 +40,7 @@ async function getClasslist()  {
   }
 }
 
-// Use the query operation to get a class by it's id
+// Use the query operation to get a class by its name
 async function getClassByName(className){
   try {
       // DEFINE TABLE FOR QUERY 
@@ -71,7 +71,71 @@ async function getClassByName(className){
   }
 }
 
+// Use the query operation to get a class by its id
+async function getClassAnalyticsDataByID(classID) {
+  try {
+    
+      // SET UP DYNAMO DB QUERY
+      var params = {
+          TableName : "video",
+          KeyConditionExpression: "#id = :id",
+          ExpressionAttributeNames: {
+            "#id":"id",
+          },
+          ExpressionAttributeValues: {
+            ":id":  {
+              S: classID
+            }
+          }
+      };
 
+      // CONNECT TO DB
+      var classData = await dynamodb.query(params, function(err, data) {
+          if (err) {
+              console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+              return [];
+          } else {
+              return data.Items[0];
+          }
+      }).promise();
+
+      return classData.Items[0];
+
+  } catch (error) {
+      console.error(error);
+      return error;
+  }
+}
+
+// Use the query operation to get a notes by class id
+async function getClassNotesByClassID(classID) {
+  try {
+    // DEFINE TABLE FOR QUERY 
+    var params = {
+      TableName: "notes"
+    };
+
+    // CONNECT TO TABLE
+    var result = await dynamoDocumentClient.scan(params).promise()
+    var notes = {}
+
+    // CREATE RETURN OBJECT
+    result.Items.forEach(function(noteFromDB) {
+        if (noteFromDB['class_id'] == classID) { 
+            notes[noteFromDB['id']] = { 
+              'note': noteFromDB.note, 
+              'date': noteFromDB.date, 
+            }
+        }
+    });
+    
+    return notes;
+
+  } catch (error) {
+      console.error(error);
+      return error;
+  }
+}
 
 // GET CLASS LISTS FOR DROPDOWN
 router.get("/dashboard/dropdown", async function(req, res, next) {
@@ -82,6 +146,22 @@ router.get("/dashboard/dropdown", async function(req, res, next) {
 // GET VIDEO LIST FOR TABLE
 router.get("/dashboard/class-videos", async function(req, res, next) {
     var data = await getClassByName(req.query.classname);
+    res.send(data);
+});
+
+
+// GET VIDEO ANALYTICS DATA
+// /dashboard/analytics/${props.match.params.classID}
+router.get("/analytics/class-analytics", async function(req, res, next) {
+
+    var data = {
+        "video": {},
+        "notebook": []
+    };
+
+    data.video = await getClassAnalyticsDataByID(req.query.classID);
+    data.notebook = await getClassNotesByClassID(req.query.classID);
+
     res.send(data);
 });
 
