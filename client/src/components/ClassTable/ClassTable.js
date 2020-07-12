@@ -1,5 +1,11 @@
 import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -43,9 +49,21 @@ export default function ClassTable() {
   if (count == 0) {
 
     return(
-      <div>
-          Please select a class to view data.
-      </div>
+      <Grid item xs={12} sm={6} md={4}>
+
+        <Card className={classes.card}>
+            <CardMedia className={classes.cardMedia} image="https://source.unsplash.com/random" title="Image title" />
+
+            <CardContent className={classes.cardContent}>
+              <Typography gutterBottom variant="h5" component="h2">
+                Empty  . . . for now
+              </Typography>
+              <Typography>
+                Select a class to view lecture videos
+              </Typography>
+            </CardContent>
+        </Card>
+        </Grid>
     )
 
   } else {
@@ -54,7 +72,6 @@ export default function ClassTable() {
     Object.keys(state.videoClassList).forEach(function(key) {
         videos.push(key);
     });
-    
     return (
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">

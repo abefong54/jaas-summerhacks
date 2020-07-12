@@ -12,6 +12,7 @@ import { Grid } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    paddingRight: 24, // keep right padding when drawer closed
   },
   menuButton: {
   /*marginRight: theme.spacing(1),*/
@@ -28,19 +29,18 @@ export default function Header() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar style={{ background: 'black' }} position="fixed">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            {/* <MenuIcon /> */}
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-              Lecture Insight Platform
-          </Typography>
-                <Link to="/dashboard" className={classes.menuButton}> DASHBOARD </Link>
-                <Button className={classes.menuButton} >Settings</Button>
-                <Link to="/" className={classes.menuButton} >SIGN OUT</Link>
-            {/* <Button Link to= "/ "className={classes.menuButton} >Sign Out</Button> */}
+    <div>
+      <AppBar position="absolute" style={{background: 'black'}}>
+        <Toolbar className={classes.root}>
+            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+              {/* <MenuIcon /> */}
+            </IconButton>
+            <Typography variant="h6" className={classes.title}>
+                Zoom-U Emo-lytics
+            </Typography>
+            <Link to="/dashboard" className={classes.menuButton}> DASHBOARD </Link>
+            <Button to="/"  className={classes.menuButton} >Settings</Button>
+            <Link to="/" className={classes.menuButton} >SIGN OUT</Link>
         </Toolbar>
       </AppBar>
     </div>
