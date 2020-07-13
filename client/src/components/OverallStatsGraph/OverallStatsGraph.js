@@ -48,8 +48,8 @@ export default function OverallStatsGraph({classAnalytics}){
        }],
       }
     return(
-        <div className="overall" >
-            <CanvasJSChart options = {options}
+        <div className="overall" style={{height:"300px", width:"300px"}}>
+            <CanvasJSChart options = {options} 
                 /* onRef = {ref => this.chart = ref} */
             />
         </div>

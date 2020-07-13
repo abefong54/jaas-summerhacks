@@ -51,7 +51,7 @@ export default function Analytics(props) {
           <Grid item xs={4}>
             <Paper className={classes.paper}>
               ALMAS CODE HERE
-  {/*             <OverallStatsGraph/> */}
+              <OverallStatsGraph classAnalytics={classAnalytics}/>
               </Paper>
           </Grid>
           <Grid item xs={8}>
