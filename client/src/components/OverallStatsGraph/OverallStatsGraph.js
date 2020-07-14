@@ -1,10 +1,32 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 import CanvasJSReact from '../../canvas/canvasjs.react';
 //var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
+
+
+const useStyles = makeStyles({
+  graph: {
+    
+    position: "absolute",
+    top: "70%",
+    left:"1%",
+
+    
+    
+  },
+ 
+  
+});
+
+
 export default function OverallStatsGraph({classAnalytics}){
+    const styles = useStyles()
     console.log("INSIDE OVERAALLSTATSGRAPH.js")
 
     //CHECKING THE PROPS PASSED INTO THIS COMPONENT
@@ -14,26 +36,27 @@ export default function OverallStatsGraph({classAnalytics}){
     
     
     const options = {
-    backgroundColor: "black",
+    backgroundColor: "white",
     height:400,
     width:450,
     
       title: {
         text: "Overall stats",
-        fontColor:"#87cefa",
+        fontColor:"black",
       },
       axisX:{
         interval: 1,
-        labelFontColor: "#87cefa",
+        labelFontColor: "black",
       },
       axisY2:{
         title: "Scale",
-        labelFontColor: "white",
+        labelFontColor: "black",
       },
       data: [{
           type: "bar",
           axisYType: "secondary",
-          color: "#87cefa",
+          color:"lightskyblue",
+          
                 
           dataPoints: [
               { y: parseInt(classAnalytics.unknown_sum), label: "Unknown" },
@@ -43,16 +66,21 @@ export default function OverallStatsGraph({classAnalytics}){
               { y: parseInt(classAnalytics.disgusted_sum), label: "Disgusted" },
               { y: parseInt(classAnalytics.angry_sum), label: "Angry" },
               { y: parseInt(classAnalytics.sad_sum), label: "Sad" },
-              { y: parseInt(classAnalytics.happy_sum), label: "Happy"  },
+              { y: parseInt(classAnalytics.happy_sum), label: "Happy"},
            ]
        }],
       }
     return(
-        <div className="overall" style={{height:"300px", width:"300px"}}>
-            <CanvasJSChart options = {options} 
+      <Grid item xs={4}>
+            <Paper >
+            <div className={styles.graph} style={{width:"50px", height:"50px"}}>
+                <CanvasJSChart options = {options} 
                 /* onRef = {ref => this.chart = ref} */
-            />
-        </div>
+                />
+            </div>
+            </Paper>
+      </Grid>
+        
         
 
     )
