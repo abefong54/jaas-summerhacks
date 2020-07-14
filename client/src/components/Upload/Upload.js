@@ -24,7 +24,10 @@ class UploadModal extends Component {
       responseToPost: '',
       modalShow: false,
       file: null,
-      valueName: '',
+      date: '',
+      class: '',
+      lecture: '',
+      fileName: '',
       config: {
         bucketName: 's3-bucket-v2',
         region: 'us-east-2',
@@ -38,16 +41,30 @@ class UploadModal extends Component {
     this.setState({ modalShow: true });
   }
   hideModal = () => {
-    this.setState({ modalShow: false });
+      this.setState({ progressShow: false });
+      this.setState({ modalShow: false });
+  }
+
+  dateChange = (event) =>{
+    console.log(event.target.value);
+    this.setState({ date: event.target.value });
+  }
+
+  classChange = (event) =>{
+    console.log(event.target.value);
+    this.setState({ class: event.target.value });
+  }
+
+  lectureChange = (event) =>{
+    console.log(event.target.value);
+    this.setState({ lecture: event.target.value });
   }
 
   handleFileChange = (event) => {
     this.setState({ file: event.target.files[0] });
   }
 
-  handleTextChange = (event) => {
-    console.log('file name: ' + event.target.value);
-    this.setState({ fileName: event.target.value });
+  concatFileName = () => {
   }
 
   uponSuccessfulUpload = data => {
@@ -60,12 +77,15 @@ class UploadModal extends Component {
   }
 
   handleFileUpload = () => {
+    const file_name = this.state.date + '-' + this.state.class + '-' + this.state.lecture;
+    this.setState({ fileName: file_name });
+    
     this.setState({ progressShow: true });
-    console.log("uploading " + this.state.fileName);
+    console.log("uploading " + file_name);
 
     const ReactS3Client = new S3(this.state.config);
     ReactS3Client
-      .uploadFile(this.state.file, this.state.fileName)
+      .uploadFile(this.state.file, file_name)
       .then(data => this.uponSuccessfulUpload(data))
       .catch(err => console.error(err));
   }
@@ -89,8 +109,12 @@ class UploadModal extends Component {
             <p>Upload Lecture Video</p>
             <input type='file' onChange={this.handleFileChange} />
             <div className="file-name-div">
-              <p>Enter Lecture Date and Name</p>
-              <input type='text' value="ex: 07-02-2020-BIO-2231" onChange={this.handleTextChange} />
+              <p>Enter lecture date: </p>
+              <input type='text' placeholder="mmddyy" onChange={this.dateChange} />
+              <p>Enter class name: </p>
+              <input type='text' placeholder="Class Name" onChange={this.classChange} />
+              <p>Enter lecture name: </p>
+              <input type='text' placeholder="Lecture Name" onChange={this.lectureChange} />
             </div>
             {this.state.progressShow && <CircularIndeterminate />}
           </Modal.Body>

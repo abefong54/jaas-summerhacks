@@ -23,12 +23,13 @@ const useStyles = makeStyles({
     },
 });
 
-export default function Analytics(){
+export default function Analytics(props){
     const style=useStyles();
+    const {vidName} = props.location.state;
     return(
         <div className={style.root}>
             <div className={style.vid}>
-                <PlayVid/>
+                <PlayVid vid_name={vidName}/>
             </div>
             <div className={style.realtime}>
                 <RealTimeStats/>

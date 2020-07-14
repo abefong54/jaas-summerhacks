@@ -13,20 +13,20 @@ import { Link } from 'react-router-dom';
 const useStyles = makeStyles({
   table: {
     //width:"auto", WORKS IN RESPONSIVENESS, SO NOT NEEDED.
-    tableLayout:"auto",
-    backgroundColor:'lightskyblue',
-    fixedHeader:"false",
-    border:"2px solid white",
-    elevation:"5"
-    
-    
+    tableLayout: "auto",
+    backgroundColor: 'lightskyblue',
+    fixedHeader: "false",
+    border: "2px solid white",
+    elevation: "5"
+
+
   },
-  header:{
-    backgroundColor:'lightskyblue',
-    color:'white',
+  header: {
+    backgroundColor: 'lightskyblue',
+    color: 'white',
   }
- 
-  
+
+
 });
 
 
@@ -34,52 +34,57 @@ export default function ClassTable() {
   const classes = useStyles();
 
 
-  const {state, dispatch} = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
   const changeInputValue = (newValue) => {
 
-      dispatch({ type: 'UPDATE_INPUT', data: newValue,});
+    dispatch({ type: 'UPDATE_INPUT', data: newValue, });
   };
-  
+
   var count = Object.keys(state.videoClassList).length;
 
   if (count == 0) {
-    return(
+    return (
       <div>Please select a class to view data.</div>
     )
   }
   else {
 
     var classKeys = [];
-    Object.keys(state.videoClassList).forEach(function(key) {
-        classKeys.push(key);
+    Object.keys(state.videoClassList).forEach(function (key) {
+      classKeys.push(key);
     });;
     return (
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow style={{backgroundColor:'black'}}>
-                <TableCell style={{color:'lightskyblue'}}width="200" >CLASS NAME</TableCell>
-                <TableCell style={{color:'lightskyblue'}}width="200" align="left">LECTURE DAY</TableCell>
-                <TableCell style={{color:'lightskyblue'}}width="200" align="left">LECTURE NAME</TableCell>
-            
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow style={{ backgroundColor: 'black' }}>
+              <TableCell style={{ color: 'lightskyblue' }} width="200" >CLASS NAME</TableCell>
+              <TableCell style={{ color: 'lightskyblue' }} width="200" align="left">LECTURE DAY</TableCell>
+              <TableCell style={{ color: 'lightskyblue' }} width="200" align="left">LECTURE NAME</TableCell>
+
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {classKeys.map((key) => (
+              <TableRow key={key}>
+                <TableCell component="th" scope="row">
+                  {state.videoClassList[key].class_name}
+                </TableCell>
+                <TableCell align="left">{state.videoClassList[key].lecture_day}</TableCell>
+
+                <TableCell align="left">
+                  <Link to={{
+                    pathname:"/analytics",
+                    state: {
+                      vidName: state.videoClassList[key].video_name
+                    }
+                  }}>{state.videoClassList[key].video_name}</Link>
+                </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-                {classKeys.map((key) => (
-                <TableRow key={key}>
-                  <TableCell component="th" scope="row">
-                    {state.videoClassList[key].class_name}
-                  </TableCell>
-                  <TableCell align="left">{state.videoClassList[key].lecture_day}</TableCell>
-                  
-                  <TableCell align="left">
-                      <Link to ="/analytics">{state.videoClassList[key].lecture_name}</Link>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     );
   }
 }

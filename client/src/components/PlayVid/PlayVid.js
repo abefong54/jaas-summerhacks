@@ -2,11 +2,11 @@
 import React from 'react';
 import ReactPlayer from 'react-player'
 
-class PlayVid extends React.Component {
-    render(){
-        return(
-            <ReactPlayer url='https://s3-bucket-v2.s3.us-east-2.amazonaws.com/letss-see.mp4' controls='true'/>
-        )
-    }
+export default function PlayVid(props) {
+    console.log('from playvid: ' + props.vid_name);
+    const vid = '07-02-2020-biology';
+    const vid_url = 'https://s3-bucket-v2.s3.us-east-2.amazonaws.com/' + props.vid_name
+    return (
+        <ReactPlayer url={vid_url} controls='true' />
+    )
 }
-export default PlayVid;
