@@ -4,6 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import OverallStatsGraph from '../../components/OverallStatsGraph/OverallStatsGraph';
 import Notebook from '../../components/Notebook/Notebook';
+import RealTimeStats from '../../components/RealTimeStats/RealTimeStats';
 import { Component } from 'react'
 
 const useStyles = makeStyles((theme) => ({
@@ -55,7 +56,9 @@ export default function Analytics(props) {
               </Paper>
           </Grid>
           <Grid item xs={8}>
-            <Paper className={classes.paper}>GRAPH</Paper>
+            <Paper className={classes.paper}>
+              <RealTimeStats/>
+            </Paper>
           </Grid>
         </Grid>
       </div>
