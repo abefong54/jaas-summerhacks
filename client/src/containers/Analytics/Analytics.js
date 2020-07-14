@@ -25,6 +25,8 @@ export default function Analytics(props) {
   const style=useStyles();
   const [classAnalytics, setVideoAnalyticsData] = React.useState({});
   const [notebookData, setNotebookData] = React.useState({});
+  const {videoName} = props.location.state;
+  console.log('video name here: ' + videoName);
 
   console.log("Progs:");
   console.log(props.match.params.classID);
@@ -49,7 +51,7 @@ export default function Analytics(props) {
           </Grid>
           <Grid item xs={8}>
             <Paper className={classes.paper}>
-              <PlayVid/>
+                <PlayVid vid_name={videoName}/>
             </Paper>
           </Grid>
           <Grid item xs={4}>

@@ -70,8 +70,11 @@ export default function ClassTable() {
                   <TableRow key={key}>
                     {/* VIDEO NAME */}
                       <TableCell align="left" > 
-                          <Link to={"/analytics/"+key}> 
-                              {state.videoClassList[key].lecture_name} 
+                          <Link to={{
+                            pathname: "/analytics/"+key,
+                            state:{
+                              videoName: state.videoClassList[key].video_name
+                          }}}> {state.videoClassList[key].lecture_name}
                           </Link>
                       </TableCell>
                       {/* CLASS NAME */}
