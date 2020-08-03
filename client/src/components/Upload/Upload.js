@@ -1,11 +1,12 @@
 //THIS IS THE MODAL CODE
-import React, { Component } from "react";
+import React, { useState, useEffect, Component } from "react";
 import { Button } from "react-bootstrap";
+// import Button from '@material-ui/core/Button';
 import { Modal } from 'react-bootstrap'
 import S3 from 'react-aws-s3';
 import { makeStyles } from '@material-ui/core/styles'
+import { styled } from '@material-ui/core/styles';
 import CicularProgress from '@material-ui/core/CircularProgress'
-import { uploadFile } from 'react-s3'
 import './Upload.css'
 import swal from 'sweetalert'
 import config from '../../config.json'
@@ -13,6 +14,19 @@ import config from '../../config.json'
 import CircularIndeterminate from '../ProgressBar/CircularIndeterminate'
 
 const ReactS3Uploader = require('react-s3-uploader');
+
+const myButton = styled(Button)({
+  root: {
+    background: 'black',
+    border: 0,
+    borderRadius: 5,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    color:'#87cefa' ,
+    height: 48,
+    padding: '0 30px',
+    weight: 'bold',
+  },
+});
 
 class UploadModal extends Component {
   constructor(props) {
@@ -37,34 +51,50 @@ class UploadModal extends Component {
     }
   }
 
+  hookFunction() {
+    const useStyles = makeStyles({
+      root: {
+        background: 'black',
+        border: 0,
+        borderRadius: 5,
+        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        color: '#87cefa',
+        height: 48,
+        padding: '0 30px',
+        weight: 'bold',
+      },
+    });
+    const stylings = useStyles();
+    return (
+      <Button className={stylings.root} aria-controls="simple-menu" aria-haspopup="true" onClick={this.showModal}>Upload</Button>
+    )
+  }
+
   showModal = () => {
     this.setState({ modalShow: true });
   }
   hideModal = () => {
-      this.setState({ progressShow: false });
-      this.setState({ modalShow: false });
+    this.setState({ progressShow: false });
+    this.setState({ modalShow: false });
   }
 
-  dateChange = (event) =>{
+  dateChange = (event) => {
     console.log(event.target.value);
     this.setState({ date: event.target.value });
   }
 
-  classChange = (event) =>{
+  classChange = (event) => {
     console.log(event.target.value);
     this.setState({ class: event.target.value });
   }
 
-  lectureChange = (event) =>{
+  lectureChange = (event) => {
     console.log(event.target.value);
     this.setState({ lecture: event.target.value });
   }
 
   handleFileChange = (event) => {
     this.setState({ file: event.target.files[0] });
-  }
-
-  concatFileName = () => {
   }
 
   uponSuccessfulUpload = data => {
@@ -79,7 +109,7 @@ class UploadModal extends Component {
   handleFileUpload = () => {
     const file_name = this.state.date + '-' + this.state.class + '-' + this.state.lecture;
     this.setState({ fileName: file_name });
-    
+
     this.setState({ progressShow: true });
     console.log("uploading " + file_name);
 
@@ -91,14 +121,15 @@ class UploadModal extends Component {
   }
 
   render() {
+
     return (
       <>
         <Modal
-            show={this.state.modalShow}
-            onHide={this.hideModal}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
+          show={this.state.modalShow}
+          onHide={this.hideModal}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
@@ -112,21 +143,17 @@ class UploadModal extends Component {
               <p>Enter lecture date: </p>
               <input type='text' placeholder="mmddyy" onChange={this.dateChange} />
               <p>Enter class name: </p>
-              <input type='text' placeholder="Class Name" onChange={this.classChange} />
+              <input type='text' placeholder="Class Name (no spaces)" onChange={this.classChange} />
               <p>Enter lecture name: </p>
-              <input type='text' placeholder="Lecture Name" onChange={this.lectureChange} />
+              <input type='text' placeholder="Lecture Name (no spaces)" onChange={this.lectureChange} />
             </div>
             {this.state.progressShow && <CircularIndeterminate />}
           </Modal.Body>
           <Modal.Footer>
-            {/* for now it just closes the modal */}
             <Button onClick={this.handleFileUpload}>Save Changes</Button>
-            {/* <Button onClick={this.checkEmpty}>Check</Button> */}
           </Modal.Footer>
         </Modal>
-        <Button variant="primary" onClick={this.showModal}>
-          Upload
-        </Button>
+        <Button aria-controls="simple-menu" aria-haspopup="true" onClick={this.showModal}>Upload</Button>
       </>
     );
   }
