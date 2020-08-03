@@ -15,17 +15,17 @@ import { Button } from '@material-ui/core';
 const useStyles = makeStyles({
   table: {
     //width:"auto", WORKS IN RESPONSIVENESS, SO NOT NEEDED.
-    tableLayout:"auto",
-    backgroundColor:'lightskyblue',
-    fixedHeader:"false",
-    border:"2px solid white",
-    elevation:"5"
-    
-    
+    tableLayout: "auto",
+    backgroundColor: 'lightskyblue',
+    fixedHeader: "false",
+    border: "2px solid white",
+    elevation: "5"
+
+
   },
-  header:{
-    backgroundColor:'lightskyblue',
-    color:'white',
+  header: {
+    backgroundColor: 'lightskyblue',
+    color: 'white',
   }
 });
 
@@ -37,7 +37,7 @@ export default function ClassTable() {
   const changeInputValue = (newValue) => {
       dispatch({ type: 'UPDATE_INPUT', data: newValue,});
   };
-  
+
   var count = Object.keys(state.videoClassList).length;
 
   if (count == 0) {
@@ -54,11 +54,7 @@ export default function ClassTable() {
     Object.keys(state.videoClassList).forEach(function(key) {
         videos.push(key);
     });
-
-    console.log("stuff you tried");
-    console.log(state.videoClassList);
-
-
+    
     return (
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
@@ -74,8 +70,11 @@ export default function ClassTable() {
                   <TableRow key={key}>
                     {/* VIDEO NAME */}
                       <TableCell align="left" > 
-                          <Link to={"/analytics/"+key}> 
-                              {state.videoClassList[key].lecture_name} 
+                          <Link to={{
+                            pathname: "/analytics/"+key,
+                            state:{
+                              videoName: state.videoClassList[key].video_name
+                          }}}> {state.videoClassList[key].lecture_name}
                           </Link>
                       </TableCell>
                       {/* CLASS NAME */}

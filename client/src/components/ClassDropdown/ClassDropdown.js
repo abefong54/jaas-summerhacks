@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from '../../containers/Dashboard/Dashboard'
+
 import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
@@ -32,6 +33,9 @@ export default function ClassDropdown() {
     async function fetchVideos() {
         const fullResponse = await fetch(`http://localhost:9000/resources/dashboard/class-videos?classname=${newValue}`)
         const response = await fullResponse.json();
+        console.log("Dispatching" + newValue);
+        console.log("data response");
+        console.log(response);
         dispatch({ type: 'UPDATE_INPUT', data: response,});
     }
     fetchVideos();

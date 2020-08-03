@@ -5,6 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import OverallStatsGraph from '../../components/OverallStatsGraph/OverallStatsGraph';
 import Notebook from '../../components/Notebook/Notebook';
 import { Component } from 'react'
+import PlayVid from '../../components/PlayVid/PlayVid';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +25,8 @@ export default function Analytics(props) {
   const style=useStyles();
   const [classAnalytics, setVideoAnalyticsData] = React.useState({});
   const [notebookData, setNotebookData] = React.useState({});
+  const {videoName} = props.location.state;
+  console.log('video name here: ' + videoName);
 
   console.log("Progs:");
   console.log(props.match.params.classID);
@@ -46,7 +50,9 @@ export default function Analytics(props) {
             <Notebook notebookData={notebookData}/>
           </Grid>
           <Grid item xs={8}>
-            <Paper className={classes.paper}>SHUBHA CODE HERE</Paper>
+            <Paper className={classes.paper}>
+                <PlayVid vid_name={videoName}/>
+            </Paper>
           </Grid>
           <Grid item xs={4}>
             <Paper className={classes.paper}>

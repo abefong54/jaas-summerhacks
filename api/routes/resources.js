@@ -58,11 +58,11 @@ async function getClassByName(className){
           classes[itemdata['id']] = {
             'class_name': itemdata.class_name,
             'lecture_name': itemdata.lecture_name,
-            'lecture_day': itemdata.lecture_day
+            'lecture_day': itemdata.lecture_day,
+            'video_name': itemdata.video_name
           }
         }
       })
-      
       return classes;
 
   } catch (error) {
